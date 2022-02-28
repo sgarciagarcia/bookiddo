@@ -1,7 +1,5 @@
-import { useContext } from 'react';
 
 import './App.css';
-import { Context } from './Context';
 import WelcomeForm from './components/WelcomeForm';
 
 
