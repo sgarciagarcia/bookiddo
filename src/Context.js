@@ -1,6 +1,6 @@
 import {createContext} from 'react'
 
-const Context = createContext({});
+export const Context = createContext({});
 
 const ContextProvider = ({ children }) => {
 
