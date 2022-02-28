@@ -1,7 +1,11 @@
 
 const StepOne = () =>{
     return(
-        <div>Contenido paso 1</div>
+        <div>
+            <h1>Welcome!</h1>
+            <p>You and your kid are about to experience the greatest adventure of all: reading!</p>
+            <p>We need to ask you 2 questions first...</p>
+        </div>
         )
 }
 
