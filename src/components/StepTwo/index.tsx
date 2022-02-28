@@ -1,26 +1,27 @@
-import { useState, ChangeEvent } from 'react';
+import { useState, ChangeEvent, useContext } from 'react';
 
 
+import { FormContext } from '../../FormContext'
 
 const StepTwo = () =>{
     const [userName, setUserName] = useState<string>('');
-    const saveUserName = (userName:string) => {
-        console.log(userName)
-    } //de momento lo guardo en un array pero tengo que guardarlo en la base de datos
+    // const { saveUserName } = useContext(FormContext);
+
+    
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         setUserName(e.target.value);
       };
     
-    const handleSubmit = () => {
-
+      const handleSubmit = () => {
         if (userName.trim()) {
-          saveUserName(userName);
+          console.log(userName);
         }
       };
+
     return(
         <div>
             <h2>What is your kid's name?</h2>
-            <form onSubmit={handleSubmit}>
+            <form >
                 <label>Name: </label>
                 <input 
                 onChange={handleChange}
@@ -28,6 +29,7 @@ const StepTwo = () =>{
                 autoFocus={true}
                 placeholder="Write the name..."></input>
             </form>
+            <button onClick={() => handleSubmit()}>Next!</button>
         </div>
         )}
 

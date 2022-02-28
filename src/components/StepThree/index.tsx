@@ -7,6 +7,7 @@ const StepThree = () =>{
     return(
         <div>Contenido paso 3
             <button onClick={() => goPreviousStep()}>Back</button>
+            {/* Otro botón que guarde los keywords marcados en bbdd y avance el step */}
         </div>
         
         )

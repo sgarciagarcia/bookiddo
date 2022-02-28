@@ -22,7 +22,7 @@ const WelcomeForm = () =>{
         Step Content
         Botón next
         Botón back */}
-        {step === 1 && <StepOne/>}
+        {step === 1 && <StepOne />}
         {step === 2 && <StepTwo/> } 
         {step === 3 && <StepThree/>}
         {step === 4 && <><StepFour/>
