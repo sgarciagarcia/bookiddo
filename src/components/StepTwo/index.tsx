@@ -4,8 +4,7 @@ import { useState, ChangeEvent, useContext } from 'react';
 import { FormContext } from '../../FormContext'
 
 const StepTwo = () =>{
-    const [userName, setUserName] = useState<string>('');
-    // const { saveUserName } = useContext(FormContext);
+  const {userName, setUserName}:any = useContext(FormContext);
 
     
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
