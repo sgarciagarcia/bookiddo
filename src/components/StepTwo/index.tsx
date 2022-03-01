@@ -14,7 +14,7 @@ const StepTwo = () =>{
     
       const handleSubmit = () => {
         if (userName.trim()) {
-          console.log(userName);
+          console.log(userName); 
         }
       };
 

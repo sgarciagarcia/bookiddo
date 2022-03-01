@@ -11,7 +11,7 @@ import StepFour from "../StepFour";
 
 const WelcomeForm = () =>{
     
-    const { goNextStep, step } = useContext(FormContext);
+    const {step}:any = useContext(FormContext);
 
  
     

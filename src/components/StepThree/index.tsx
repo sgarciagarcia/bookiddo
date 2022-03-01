@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { FormContext } from "../../FormContext";
 
 const StepThree = () =>{
-    const { goPreviousStep } = useContext(FormContext);
+    const { goPreviousStep }:any = useContext(FormContext);
 
     return(
         <div>Contenido paso 3

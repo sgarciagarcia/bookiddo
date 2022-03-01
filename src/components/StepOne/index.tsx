@@ -4,7 +4,7 @@ import { FormContext } from '../../FormContext'
 
 const StepOne = () =>{
 
-    const { goNextStep } = useContext(FormContext);
+    const {goNextStep}:any = useContext(FormContext);
 
     return(
         <div>
