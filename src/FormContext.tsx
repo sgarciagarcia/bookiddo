@@ -1,6 +1,7 @@
 import { createContext, useEffect, useState } from 'react';
 import { getDatabase, ref, update, child, get } from "firebase/database";
 import { getAuth, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
+import { resourceLimits } from 'worker_threads';
 
 
 // import reducer from './store/reducer';
@@ -9,10 +10,28 @@ import { getAuth, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
 export const FormContext = createContext({});
 
 const FormContextProvider = ({ children }:any) => {
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
     const [step, setStep] = useState<number>(1); //el paso inicial es el 1
-    const [userName, setUserName] = useState<string>('');
-
+    type kidDataProps = {
+        kidName: string,
+        kidAge: number
+    }
+    const [kidData, setKidData] = useState<kidDataProps>({
+        kidName:'',
+        kidAge:1
+    }); //los datos del niño que mete el usuario en welcome form
+    type userDataProps = {
+        token: string,
+        name: string,
+        email: string,
+        userId: number,
+    }
+    const [userData, setUserData] = useState<userDataProps>({
+        token: '',
+        name: '',
+        email:'',
+        userId:0
+    }); //los datos del usuario que le pillamos al loguearse
  
 
     const goNextStep = () => {
@@ -23,15 +42,19 @@ const FormContextProvider = ({ children }:any) => {
     }
 
    //Guardar en database
-    const storeInDatabase = (userId:number) => {
+   useEffect(() => {
+    storeInDatabase();
+   }, [kidData]);
+
+    const storeInDatabase = () => {
         const db = getDatabase();
-        set(ref(db, `users/${userId}`), {username: userName});
+        set(ref(db, `users/${userData?.userId}`), {kidname: kidData.kidName});
       };
 
    //Leer database
    const getFromDatabase = async() => {
     const dbRef = ref(getDatabase());
-    const dbSnapshot = await get(child(dbRef, `users/${userId}`))
+    const dbSnapshot = await get(child(dbRef, `users/${userData?.userId}`))
     if (dbSnapshot.exists()) { //si este user existe en la bbdd muestra sus valores
         console.log(dbSnapshot.val());
       } else {
@@ -39,30 +62,29 @@ const FormContextProvider = ({ children }:any) => {
       }
    };
 
-   //se lanza al pulsar el botón login con google
-   const handleLogin = () => {
+   //se lanza al pulsar el botón login con google y se guardan datos del usuario en un estado
+   const handleLogin = async () => {
     const provider = new GoogleAuthProvider();
         const auth = getAuth();
-        signInWithPopup(auth, provider)
-        .then((result) => {
-            // This gives you a Google Access Token. You can use it to access the Google API.
-            const credential = GoogleAuthProvider.credentialFromResult(result);
-            const token = credential.accessToken;
-            // The signed-in user info.
-            const user = result.user;
-            // ...
-        })
+        const result = await signInWithPopup(auth, provider);
+        const storedData = {
+            token: result.user.accessToken,
+            name: result.user.displayName,
+            email:result.user.email,
+            userId: result.user.uid
+        }  
+        setUserData(storedData);
+        setIsLoggedIn(true);
    };
 
-   if (!isLoggedIn) return <button onClick={handleLogin}> Login </button>
     return (
         <FormContext.Provider value={{
             step,
             setStep,
             goPreviousStep,
             goNextStep, 
-            setUserName,
-            userName
+            setKidData,
+            kidData
         }}>
             {children}
         </FormContext.Provider>

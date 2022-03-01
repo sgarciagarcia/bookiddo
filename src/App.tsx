@@ -6,8 +6,8 @@ import { FormContext } from '././FormContext';
 
 
 function App() {
-  // const { isLoggedIn, handleLogin } = useContext(Context);
-  // if (!isLoggedIn) return <LoginButton onClick={handleLogin} />;
+  const { isLoggedIn, handleLogin }:any = useContext(FormContext);
+  if (!isLoggedIn) return <button onClick={handleLogin}> Login </button> //si no está logueado se muestra el botón login
   return (
   <WelcomeForm/>
   );
