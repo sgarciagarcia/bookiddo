@@ -13,6 +13,7 @@ const StepTwo = () =>{
         ...kidData,
         [e.target.name]: value
       });
+      console.log(kidData)
       };
     
       const handleSubmit = () => {
