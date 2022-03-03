@@ -16,13 +16,20 @@ const FormContextProvider = ({ children }:any) => {
     const [step, setStep] = useState<number>(1); //el paso inicial es el 1
     type kidDataProps = {
         kidName: string,
-        kidAge: number
+        kidAge: number,
+        keyword1: string,
+        keyword2: string,
+        keyword3: string,
+        keyword4: string,
     }
     const [kidData, setKidData] = useState<kidDataProps>({
         kidName:'',
-        kidAge:1
+        kidAge:1,
+        keyword1: '',
+        keyword2: '',
+        keyword3: '',
+        keyword4: '',
     }); //los datos del niño que mete el usuario en welcome form
-
     type userDataProps = {
         // token: string,
         name: string|null,
@@ -35,7 +42,6 @@ const FormContextProvider = ({ children }:any) => {
         email:'',
         userId:''
     }); //los datos del usuario que le pillamos al loguearse
- 
 
     const goNextStep = () => {
         setStep(step + 1);
@@ -44,16 +50,11 @@ const FormContextProvider = ({ children }:any) => {
         setStep(step - 1);
     }
 
-//    //Guardar en database
-//    useEffect(() => {
-//     storeInDatabase();
-//    }, [kidData]);
-
-//     const storeInDatabase = () => {
-//         const storedData = getLocalStorage('userData');
-//         const db = getDatabase();
-//         set(ref(db, `users/${userData?.userId}`), {kidname: kidData.kidName});
-//       };
+//    //Guardar user en database
+     const storeInDatabase = (state:any) => {
+         const db = getDatabase();
+            update(ref(db, `users/${userData?.userId}`), state);
+      };
 
 //    //Leer database
 //    const getFromDatabase = async() => {
@@ -71,18 +72,28 @@ const FormContextProvider = ({ children }:any) => {
    const handleLogin = async () => {
         const provider = new GoogleAuthProvider();
         const auth = getAuth();
-        const result = await signInWithPopup(auth, provider);
+        const result = await signInWithPopup(auth, provider) as any;
         const dataToStore = {
-            // token: result.user.accessToken, 
+            //token: result.user.accessToken, 
             name: result.user.displayName,
             email:result.user.email,
             userId: result.user.uid
         }  
-        setUserData(dataToStore);
-        console.log(userData)
-
+        storeInDatabase(dataToStore);
         setIsLoggedIn(true);
    };
+
+//Context Step 3
+type topicButtonProps = {
+    checked: boolean,
+    disabled: boolean,
+}
+const [topicButton, setTopicButton] = useState<topicButtonProps>({
+   checked:false,
+   disabled: false,
+}); //los estados del botón de los topics
+
+
 
     return (
         <FormContext.Provider value={{
@@ -93,6 +104,8 @@ const FormContextProvider = ({ children }:any) => {
             setKidData,
             kidData,
             handleLogin,
+            isLoggedIn,
+            topicButton
             // getFromDatabase,
             // storeInDatabase,
         }}>
