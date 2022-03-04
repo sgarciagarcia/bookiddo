@@ -95,6 +95,7 @@ const [topicButton, setTopicButton] = useState<topicButtonProps>({
 
 
 
+
     return (
         <FormContext.Provider value={{
             step,
@@ -105,9 +106,8 @@ const [topicButton, setTopicButton] = useState<topicButtonProps>({
             kidData,
             handleLogin,
             isLoggedIn,
-            topicButton
-            // getFromDatabase,
-            // storeInDatabase,
+            topicButton,
+            setTopicButton,
         }}>
             {children}
         </FormContext.Provider>
