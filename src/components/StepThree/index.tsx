@@ -1,9 +1,10 @@
 import { useContext, useState } from "react";
 import { FormContext } from "../../FormContext";
+import { getLocalStorage } from "../../localStorage";
 
 import TopicButton from "../TopicButton";
 const StepThree = () =>{
-    const { kidData, goPreviousStep }:any = useContext(FormContext);
+    const { kidData, setKidData, goPreviousStep, goNextStep, storeInDatabase }:any = useContext(FormContext);
     const [selectedTopics, setSelectedTopics] = useState<String[]>([]);
 
     const topicNames:any = [
@@ -43,7 +44,14 @@ const StepThree = () =>{
          setSelectedTopics(prevState => prevState.filter(selectedTopic => topic !== selectedTopic )) //quédate los que sean distintos al topic clicado
        } 
 
-       console.log(selectedTopics)
+       const storeAndNext = () => { //modifica kidData y lo sube a la bbdd
+        setKidData((prevState:any) => {
+          const newState = {...prevState, selectedTopics}
+          storeInDatabase(newState, getLocalStorage('userId')) 
+          return newState
+        });
+        goNextStep();
+       }
     return(
         <div>
             
@@ -59,7 +67,7 @@ const StepThree = () =>{
           }) }
           </ul>
             <button onClick={() => goPreviousStep()}>Back</button>
-            {/* Otro botón que guarde los keywords marcados en bbdd y avance el step */}
+            <button onClick={() => storeAndNext()}>Done!</button>
         </div>
         
         )

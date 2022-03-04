@@ -17,18 +17,12 @@ const FormContextProvider = ({ children }:any) => {
     type kidDataProps = {
         kidName: string,
         kidAge: number,
-        keyword1: string,
-        keyword2: string,
-        keyword3: string,
-        keyword4: string,
+        selectedTopics: String[]
     }
     const [kidData, setKidData] = useState<kidDataProps>({
         kidName:'',
         kidAge:1,
-        keyword1: '',
-        keyword2: '',
-        keyword3: '',
-        keyword4: '',
+        selectedTopics: []
     }); //los datos del niño que mete el usuario en welcome form
     type userDataProps = {
         // token: string,
@@ -50,13 +44,7 @@ const FormContextProvider = ({ children }:any) => {
         setStep(step - 1);
     }
 
-//    //Guardar user en database
-     const storeInDatabase = (state:any) => {
-         const db = getDatabase();
-            update(ref(db, `users/${userData?.userId}`), state);
-      };
-
-//    //Leer database
+     //Leer database
 //    const getFromDatabase = async() => {
 //     const storedData = getLocalStorage('userData');
 //     const dbRef = ref(getDatabase());
@@ -68,6 +56,13 @@ const FormContextProvider = ({ children }:any) => {
 //       }
 //    };
 
+ //Guardar user en database
+     const storeInDatabase = (dataToStore:any, userId:string) => {
+         const db = getDatabase();
+        update(ref(db, `users/${userId}`), dataToStore);
+      };
+
+      
    //se lanza al pulsar el botón login con google y se guardan datos del usuario en un estado
    const handleLogin = async () => {
         const provider = new GoogleAuthProvider();
@@ -78,11 +73,13 @@ const FormContextProvider = ({ children }:any) => {
             name: result.user.displayName,
             email:result.user.email,
             userId: result.user.uid
-        }  
-        storeInDatabase(dataToStore);
+        } 
+        setLocalStorage('userId',dataToStore.userId)
+        storeInDatabase(dataToStore, dataToStore.userId);
         setIsLoggedIn(true);
    };
 
+   
 //Context Step 3
 type topicButtonProps = {
     checked: boolean,
@@ -108,6 +105,7 @@ const [topicButton, setTopicButton] = useState<topicButtonProps>({
             isLoggedIn,
             topicButton,
             setTopicButton,
+            storeInDatabase,
         }}>
             {children}
         </FormContext.Provider>
