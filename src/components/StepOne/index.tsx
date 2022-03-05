@@ -4,8 +4,8 @@ import { FormContext } from '../../FormContext'
 
 const StepOne = () =>{
 
-    const {goNextStep}:any = useContext(FormContext);
-
+    const {goNextStep, getFromDatabase}:any = useContext(FormContext);
+    getFromDatabase()
     return(
         <div>
             <h1>Welcome!</h1>

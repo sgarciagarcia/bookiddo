@@ -45,18 +45,18 @@ const FormContextProvider = ({ children }:any) => {
     }
 
      //Leer database
-//    const getFromDatabase = async() => {
-//     const storedData = getLocalStorage('userData');
-//     const dbRef = ref(getDatabase());
-//     const dbSnapshot = await get(child(dbRef, `users/${userData?.userId}`))
-//     if (dbSnapshot.exists()) { //si este user existe en la bbdd muestra sus valores
-//         console.log(dbSnapshot.val());
-//       } else {
-//         console.log("No data available");
-//       }
-//    };
+     const getFromDatabase = async() => {
+     const userId = getLocalStorage('userId');
+     const dbRef = ref(getDatabase());
+     const dbSnapshot = await get(child(dbRef, `users/${userId}`))
+     if (dbSnapshot.exists()) { //si este user existe en la bbdd muestra sus valores
+        console.log(dbSnapshot.val().selectedTopics);
+       } else {
+         console.log("No data available");
+       }
+    };
 
- //Guardar user en database
+ //Guardar  en database
      const storeInDatabase = (dataToStore:any, userId:string) => {
          const db = getDatabase();
         update(ref(db, `users/${userId}`), dataToStore);
@@ -80,15 +80,31 @@ const FormContextProvider = ({ children }:any) => {
    };
 
    
-//Context Step 3
-type topicButtonProps = {
-    checked: boolean,
-    disabled: boolean,
-}
-const [topicButton, setTopicButton] = useState<topicButtonProps>({
-   checked:false,
-   disabled: false,
-}); //los estados del botón de los topics
+//Context Books Data
+type booksProps = [{
+    isbn:number,
+    description:string,
+    age_group?:string,
+    amazon:string,
+    title:string,
+    author:string,
+    cover:string,
+    publisher:string,
+    year:number,
+    subject:String[]
+}]
+  const [booksData, setBooksData] = useState<booksProps>([{
+    isbn:0,
+    description:'',
+    age_group:'',
+    amazon:'',
+    title:'',
+    author:'',
+    cover:'',
+    publisher:'',
+    year:2022,
+    subject:[],
+  }])
 
 
 
@@ -103,9 +119,10 @@ const [topicButton, setTopicButton] = useState<topicButtonProps>({
             kidData,
             handleLogin,
             isLoggedIn,
-            topicButton,
-            setTopicButton,
             storeInDatabase,
+            getFromDatabase,
+            setBooksData,
+            booksData,
         }}>
             {children}
         </FormContext.Provider>
