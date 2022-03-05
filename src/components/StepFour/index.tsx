@@ -1,9 +1,20 @@
-import { useContext } from "react";
-import { FormContext } from "../../FormContext";
+// import { useContext } from "react";
+// import { FormContext } from "../../FormContext";
 const StepFour = () =>{
-    const { kidData }:any = useContext(FormContext);
+    const API_NYT = async () => {
+        try {
+          const response = await fetch(
+            `https://api-sandbox.swipoo.com/get-place?text=${input}`
+          );
+          const data = await response.json();
+          setAutocompleteList(
+            data.predictions.map((prediction) => prediction.description)
+          );
+        } catch (e) {
+          console.error(e);
+        }
+      };
 
-    console.log(kidData)
     return(
         <div>Contenido paso 4</div>
         )
