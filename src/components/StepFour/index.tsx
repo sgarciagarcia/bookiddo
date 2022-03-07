@@ -13,7 +13,13 @@ const StepFour = () =>{
       isbn:book.primary_isbn10,
       description:book.description,
       age_group:book.age_group,
-      amazon:book.amazon_product_url
+      amazon:book.amazon_product_url,
+      title:book.title,
+      author:book.author,
+      cover:book.book_image,
+      publisher:book.publisher,
+      year:book.published_date,
+      price: book.price,
     }))
   }
 
@@ -22,22 +28,30 @@ const StepFour = () =>{
       `https://openlibrary.org/api/books?bibkeys=ISBN:${isbn}&format=json&jscmd=data`
     );
     const data = await response.json();
-    data[`ISBN:${isbn}`].subjects.map((book:any) => (book.name))
+    const topics = data[`ISBN:${isbn}`].subjects.map((book:any) => (book.name));
+    const isbn = data[`ISBN:${isbn}`].identifiers.isbn_10[0]
+    return {topics: topics, isbn:isbn}
+
   }
 
 
   useEffect(() => {
 
-  const API_NYT = async (kidData:any) => {
-    const bookStore:any = [] //almacen de los datos de ambas API
+  const CALL_APIS = async (kidData:any) => {
 
         try {
           if (kidData.kidAge < 8) { //Pequeños
             const response = await fetchOneList('picture-books') //llamo a lista NYT
-            const openLibRes = await Promise.all( //Llamo a OpenLib con el isbn consigo subjects
-              response.map((book:any) => fetchSubjects(book.isbn))
+            const openLibRes = await Promise.all( //Llamo a OpenLib con el isbn y consigo subjects
+              response.map((book:any) => fetchSubjects(book.isbn)) //Hace 1 llamada por cada libro de la lista NYT
             )
-            const filteredBooks = openLibRes.filter() //leer de kidData los selectedTopics
+            //REVISAR PORQUE SOLO ME FUNCIONA CON UN VALOR CONCRETO, NO MIRA KIDDATA.SELECTEDTOPICS
+            const filteredBooks = openLibRes.reduce( (filtered:any, book:any) => { //Compara los topics de OpenLibrary con los de kidData y filtra  y se queda sólo con el isbn de los que nos valen.
+              if (book.topics.includes('Leprechauns')) {
+                let someNewValue = {id: book.id}
+                 filtered.push(someNewValue);} return filtered
+            }, [])
+            //Me está devolviendo los ISBN de los libros que quiero mostrar, ahora filtraría la response de NYTimes
           }
 
           if (kidData.kidAge >=8 && kidData.kidAge < 12) { //Middle grade
@@ -64,11 +78,10 @@ const StepFour = () =>{
           console.error(e);
         }
   };
-  API_NYT(kidData);
-
+  CALL_APIS(kidData);
+          
   }, []);
 
-  console.log(bookStore)
   
  
     return(

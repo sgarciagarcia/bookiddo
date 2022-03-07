@@ -91,7 +91,8 @@ type booksProps = [{
     cover:string,
     publisher:string,
     year:number,
-    subject:String[]
+    subject:String[],
+    price:string,
 }]
   const [booksData, setBooksData] = useState<booksProps>([{
     isbn:0,
@@ -104,6 +105,7 @@ type booksProps = [{
     publisher:'',
     year:2022,
     subject:[],
+    price:''
   }])
 
 

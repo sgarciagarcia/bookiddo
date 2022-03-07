@@ -8,6 +8,8 @@ const StepThree = () =>{
     const [selectedTopics, setSelectedTopics] = useState<String[]>([]);
 
     const topicNames:any = [
+        'Leprechauns',
+        'Fiction',
         'Adventure and adventurers',
         'Animals',
         'Cartoons and comics',
