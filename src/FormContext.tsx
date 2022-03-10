@@ -6,6 +6,8 @@ import { resourceLimits } from 'worker_threads';
 
 // import reducer from './store/reducer';
 // import { FORM_ACTIONS } from './store/actions';
+import { getLocalStorage, setLocalStorage } from './localStorage';
+
 
 export const FormContext = createContext({});
 
@@ -14,25 +16,26 @@ const FormContextProvider = ({ children }:any) => {
     const [step, setStep] = useState<number>(1); //el paso inicial es el 1
     type kidDataProps = {
         kidName: string,
-        kidAge: number
+        kidAge: number,
+        selectedTopics: String[]
     }
     const [kidData, setKidData] = useState<kidDataProps>({
         kidName:'',
-        kidAge:1
+        kidAge:1,
+        selectedTopics: []
     }); //los datos del niño que mete el usuario en welcome form
     type userDataProps = {
-        token: string,
-        name: string,
-        email: string,
-        userId: number,
+        // token: string,
+        name: string|null,
+        email: string|null,
+        userId: string,
     }
     const [userData, setUserData] = useState<userDataProps>({
-        token: '',
+        // token: '',
         name: '',
         email:'',
-        userId:0
+        userId:''
     }); //los datos del usuario que le pillamos al loguearse
- 
 
     const goNextStep = () => {
         setStep(step + 1);
@@ -41,41 +44,72 @@ const FormContextProvider = ({ children }:any) => {
         setStep(step - 1);
     }
 
-   //Guardar en database
-   useEffect(() => {
-    storeInDatabase();
-   }, [kidData]);
+     //Leer database
+     const getFromDatabase = async() => {
+     const userId = getLocalStorage('userId');
+     const dbRef = ref(getDatabase());
+     const dbSnapshot = await get(child(dbRef, `users/${userId}`))
+     if (dbSnapshot.exists()) { //si este user existe en la bbdd muestra sus valores
+        console.log(dbSnapshot.val().selectedTopics);
+       } else {
+         console.log("No data available");
+       }
+    };
 
-    const storeInDatabase = () => {
-        const db = getDatabase();
-        set(ref(db, `users/${userData?.userId}`), {kidname: kidData.kidName});
+ //Guardar  en database
+     const storeInDatabase = (dataToStore:any, userId:string) => {
+         const db = getDatabase();
+        update(ref(db, `users/${userId}`), dataToStore);
       };
 
-   //Leer database
-   const getFromDatabase = async() => {
-    const dbRef = ref(getDatabase());
-    const dbSnapshot = await get(child(dbRef, `users/${userData?.userId}`))
-    if (dbSnapshot.exists()) { //si este user existe en la bbdd muestra sus valores
-        console.log(dbSnapshot.val());
-      } else {
-        console.log("No data available");
-      }
-   };
-
+      
    //se lanza al pulsar el botón login con google y se guardan datos del usuario en un estado
    const handleLogin = async () => {
-    const provider = new GoogleAuthProvider();
+        const provider = new GoogleAuthProvider();
         const auth = getAuth();
-        const result = await signInWithPopup(auth, provider);
-        const storedData = {
-            token: result.user.accessToken,
+        const result = await signInWithPopup(auth, provider) as any;
+        const dataToStore = {
+            //token: result.user.accessToken, 
             name: result.user.displayName,
             email:result.user.email,
             userId: result.user.uid
-        }  
-        setUserData(storedData);
+        } 
+        setLocalStorage('userId',dataToStore.userId)
+        storeInDatabase(dataToStore, dataToStore.userId);
         setIsLoggedIn(true);
    };
+
+   
+//Context Books Data
+type booksProps = [{
+    isbn:number,
+    title:string,
+    author:string,
+    cover:string,
+    description:string,
+    age_group?:string,
+    amazon:string,
+    publisher:string,
+    year:number,
+    subject:String[],
+    price:string,
+}]
+  const [booksData, setBooksData] = useState<booksProps>([{
+    isbn:0,
+    description:'',
+    age_group:'',
+    amazon:'',
+    title:'',
+    author:'',
+    cover:'',
+    publisher:'',
+    year:2022,
+    subject:[],
+    price:''
+  }])
+
+
+
 
     return (
         <FormContext.Provider value={{
@@ -84,7 +118,13 @@ const FormContextProvider = ({ children }:any) => {
             goPreviousStep,
             goNextStep, 
             setKidData,
-            kidData
+            kidData,
+            handleLogin,
+            isLoggedIn,
+            storeInDatabase,
+            getFromDatabase,
+            setBooksData,
+            booksData,
         }}>
             {children}
         </FormContext.Provider>
