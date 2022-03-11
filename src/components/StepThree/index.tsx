@@ -68,8 +68,8 @@ const StepThree = () =>{
           
           }) }
           </ul>
-            <button onClick={() => goPreviousStep()}>Back</button>
-            <button onClick={() => storeAndNext()}>Done!</button>
+            <button onClick={goPreviousStep}>Back</button>
+            <button onClick={ storeAndNext}>Done!</button>
         </div>
         
         )

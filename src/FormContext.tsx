@@ -13,6 +13,8 @@ export const FormContext = createContext({});
 
 const FormContextProvider = ({ children }:any) => {
     const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+    const [isRegistering, setIsRegistering] = useState<boolean>(false);
+
     const [step, setStep] = useState<number>(1); //el paso inicial es el 1
     type kidDataProps = {
         kidName: string,
@@ -25,13 +27,13 @@ const FormContextProvider = ({ children }:any) => {
         selectedTopics: []
     }); //los datos del niño que mete el usuario en welcome form
     type userDataProps = {
-        // token: string,
+        token: string,
         name: string|null,
         email: string|null,
         userId: string,
     }
     const [userData, setUserData] = useState<userDataProps>({
-        // token: '',
+        token: '',
         name: '',
         email:'',
         userId:''
@@ -45,16 +47,20 @@ const FormContextProvider = ({ children }:any) => {
     }
 
      //Leer database
-     const getFromDatabase = async() => {
-     const userId = getLocalStorage('userId');
-     const dbRef = ref(getDatabase());
-     const dbSnapshot = await get(child(dbRef, `users/${userId}`))
-     if (dbSnapshot.exists()) { //si este user existe en la bbdd muestra sus valores
-        console.log(dbSnapshot.val().selectedTopics);
-       } else {
-         console.log("No data available");
-       }
+     const getFromDatabase = async(dataToCheck:any) => {
+        const userId = getLocalStorage('userId');
+        const dbRef = ref(getDatabase());
+        const dbSnapshot = await get(child(dbRef, `users/${userId}`))
+        if (dbSnapshot.exists()) { //si este user existe en la bbdd cambia su estado a LoggedIn
+            setIsLoggedIn(true);
+        } else {registerUser(dataToCheck)}    
     };
+
+    ////Guardar uid + isRegistered
+    const registerUser = (dataToCheck:any) => {
+            storeInDatabase(dataToCheck, dataToCheck.userId);
+            setIsRegistering(true);
+    }
 
  //Guardar  en database
      const storeInDatabase = (dataToStore:any, userId:string) => {
@@ -69,14 +75,14 @@ const FormContextProvider = ({ children }:any) => {
         const auth = getAuth();
         const result = await signInWithPopup(auth, provider) as any;
         const dataToStore = {
-            //token: result.user.accessToken, 
+            token: result.user.accessToken, 
             name: result.user.displayName,
             email:result.user.email,
             userId: result.user.uid
         } 
         setLocalStorage('userId',dataToStore.userId)
-        storeInDatabase(dataToStore, dataToStore.userId);
-        setIsLoggedIn(true);
+        //Si ya existe en la bbdd isLoggedIn
+        getFromDatabase(dataToStore)
    };
 
    
@@ -119,6 +125,7 @@ type booksProps = [{
             kidData,
             handleLogin,
             isLoggedIn,
+            isRegistering,
             storeInDatabase,
             getFromDatabase,
             setBooksData,

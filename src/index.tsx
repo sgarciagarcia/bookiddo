@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import {BrowserRouter} from 'react-router-dom'
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 
 import './firebase';
@@ -11,10 +12,11 @@ import FormContextProvider from './FormContext';
 
 ReactDOM.render(
   <React.StrictMode>
+     <BrowserRouter> 
         <FormContextProvider>
-      <App />
+          <App />
       </FormContextProvider>
-
+    </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')
 );

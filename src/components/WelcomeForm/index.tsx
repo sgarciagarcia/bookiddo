@@ -23,7 +23,7 @@ const WelcomeForm = () =>{
         {step === 1 && <StepOne />}
         {step === 2 && <StepTwo/> } 
         {step === 3 && <StepThree/>}
-        {step === 4 && <StepFour/>} 
+        {step === 4 &&<StepFour/>} 
         
        
 
