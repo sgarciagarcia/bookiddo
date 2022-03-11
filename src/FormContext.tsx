@@ -90,7 +90,6 @@ type booksProps = [{
     age_group?:string,
     amazon:string,
     publisher:string,
-    year:number,
     subject:String[],
     price:string,
 }]
@@ -103,7 +102,6 @@ type booksProps = [{
     author:'',
     cover:'',
     publisher:'',
-    year:2022,
     subject:[],
     price:''
   }])

@@ -1,26 +1,30 @@
 import { useContext, useEffect } from "react";
 import { FormContext } from "../../FormContext";
+import { getLocalStorage } from "../../localStorage";
+
 const StepFour = () =>{
-  const {kidData, booksData, setBooksData}:any = useContext(FormContext);
+  const {kidData, booksData, setBooksData, storeInDatabase}:any = useContext(FormContext);
 
   const fetchOneList = async (namelist:string) => {
     const response = await fetch(
       `https://api.nytimes.com/svc/books/v3/lists/current/${namelist}.json?api-key=GiR57J7LMkPxxzuAgWnQ2sH7gSnZ6gpK`
     );
     const data = await response.json();
-    return data.results.books.map((book:any) => (
-      {
-      isbn:book.primary_isbn13,
-      title:book.title,
-      author:book.author,
-      cover:book.book_image,
-      description:book.description,
-      age_group:book.age_group,
-      amazon:book.amazon_product_url,
-      publisher:book.publisher,
-      year:book.published_date,
-      price: book.price,
-    }))
+    return data.results.books.map(({
+      primary_isbn13, title, author, book_image, description,age_group, amazon_product_url, publisher, published_date, price
+    }:any) => { 
+     return {
+      isbn: primary_isbn13,
+      title: title ?? '',
+      author: author ?? 'Author not found',
+      cover:book_image ?? 'url default', //tener cover by default
+      description:description ?? '',
+      age_group: age_group ?? '',
+      amazon:amazon_product_url ?? '',
+      publisher:publisher ?? 'Publisher not found',
+      year:published_date ?? '',
+      price: price ?? 'Price not found',
+    }} )
   }
 
   const fetchSubjects = async (isbn:number) => { //llamar api xa obtener subjects de cada isbn
@@ -72,6 +76,7 @@ const StepFour = () =>{
             //Me está devolviendo los ISBN de los libros que quiero mostrar, ahora filtraría la response de NYTimes según esos ISBN para mostrarlo en la UI (lo guardo en setBooksData)
             const definitiveBooks = getDefinitiveBooks (response, definitiveISBN)
             setBooksData(definitiveBooks)
+
             
           }
 
@@ -109,11 +114,20 @@ const StepFour = () =>{
         }
   };
   CALL_APIS(kidData);
-          
+
   }, []);
-  console.log(booksData)
-    return(
+
+  const storeBooks = () => {
+    console.log(booksData);
+    storeInDatabase({books: booksData}, getLocalStorage('userId')) } 
+
+  return(
+    <>
         <div>Contenido paso 4</div>
+        <button onClick={storeBooks}>See this book</button>
+        <button onClick={storeBooks}>Discover more books</button>
+
+</>
         )
 }
 

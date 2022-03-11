@@ -23,14 +23,7 @@ const WelcomeForm = () =>{
         {step === 1 && <StepOne />}
         {step === 2 && <StepTwo/> } 
         {step === 3 && <StepThree/>}
-        {step === 4 && <><StepFour/>
-        {/* <Link to ={'#'}> Link a ficha del libro*/}
-            <button>See book</button>
-            {/* </Link> */}
-           {/* <Link to ={'#'}> Link a Home*/}
-           <button>Discover more</button>
-            {/* </Link> */}
-            </>} 
+        {step === 4 && <StepFour/>} 
         
        
 
