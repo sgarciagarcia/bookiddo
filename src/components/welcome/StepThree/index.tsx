@@ -1,8 +1,8 @@
 import { useContext, useState } from "react";
-import { FormContext } from "../../FormContext";
-import { getLocalStorage } from "../../localStorage";
 
-import TopicButton from "../TopicButton";
+import { FormContext } from "../../../FormContext";
+import TopicButton from "../../welcome/TopicButton";
+
 const StepThree = () =>{
     const { kidData, setKidData, goPreviousStep, goNextStep, storeInDatabase }:any = useContext(FormContext);
     const [selectedTopics, setSelectedTopics] = useState<String[]>([]);

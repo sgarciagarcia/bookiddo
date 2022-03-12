@@ -65,7 +65,6 @@ type booksProps = [{
     useEffect (() => { // Comprobar si el user está registrado en bbdd una vez se ha logueado
         const checkIfRegistered = async()=> {
         setIsLoading(true)
-
         if (isLoggedIn) { 
             const exists = await getFromDatabase()
             if (exists === null) {setIsRegistering(true)}

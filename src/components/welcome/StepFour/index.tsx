@@ -1,9 +1,9 @@
 import { useContext, useEffect } from "react";
 import {Link} from 'react-router-dom'
 
-import { FormContext } from "../../FormContext";
-import { getLocalStorage } from "../../localStorage";
-import SearchResult from '../SearchResult'
+import { FormContext } from "../../../FormContext";
+import { getLocalStorage } from "../../../localStorage";
+import SearchResult from '../../SearchResult'
 
 const StepFour = () =>{
   const {kidData, booksData, setBooksData, storeInDatabase, setIsRegistering, setIsLoading}:any = useContext(FormContext);
@@ -131,8 +131,6 @@ const StepFour = () =>{
       books: booksData,
     }, userData.userId) 
   } 
-
-
   return(
     <>
         <h1>Hooray!</h1>
