@@ -91,10 +91,7 @@ type booksProps = [{
         return null
     };
 
-    ////Guardar uid + isRegistered
-    const registerUser = (dataToCheck:any) => {
-        storeInDatabase(dataToCheck, dataToCheck.userId);
-    }
+    
 
  //Guardar  en database
      const storeInDatabase = (dataToStore:any, userId:string) => {
@@ -135,6 +132,7 @@ type booksProps = [{
             handleLogin,
             isLoggedIn,
             isRegistering,
+            setIsRegistering,
             storeInDatabase,
             getFromDatabase,
             setBooksData,

@@ -1,9 +1,12 @@
 import { useContext, useEffect } from "react";
+import {Link} from 'react-router-dom'
+
 import { FormContext } from "../../FormContext";
 import { getLocalStorage } from "../../localStorage";
+import SearchResult from '../SearchResult'
 
 const StepFour = () =>{
-  const {kidData, booksData, setBooksData, storeInDatabase}:any = useContext(FormContext);
+  const {kidData, booksData, setBooksData, storeInDatabase, setIsRegistering}:any = useContext(FormContext);
 
   const fetchOneList = async (namelist:string) => {
     const response = await fetch(
@@ -118,17 +121,21 @@ const StepFour = () =>{
   }, []);
 
   const storeBooks = () => {
+    setIsRegistering(false)
     const userData = getLocalStorage('userOuthData') 
     storeInDatabase({
       ...userData,
       ...kidData,
       books: booksData,
+    }, userData.userId) 
+  } 
 
-    }, userData.userId) } 
 
   return(
     <>
-        <div>Contenido paso 4</div>
+        <h1>Hooray!</h1>
+        <p>We have found the perfect book for {kidData.kidName}! </p>
+        <SearchResult/>
         <button onClick={storeBooks}>See this book</button>
         <button onClick={storeBooks}>Discover more books</button>
 
