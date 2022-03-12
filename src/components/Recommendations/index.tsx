@@ -1,8 +1,9 @@
 import { useContext, useEffect } from "react";
-import { FormContext } from "../../FormContext";
 
+import { FormContext } from "../../FormContext";
 import BookPreview from '../books/BookPreview'
-const Home = () =>{
+
+const Recommendations = () =>{
     const {setKidData, kidData, getFromDatabase, setIsLoading, setBooksData, booksData}:any = useContext(FormContext);
     
     useEffect (()=>{
@@ -21,10 +22,10 @@ const Home = () =>{
         <ul>
             {booksData.map (({
       primary_isbn13, title, author, cover, description,age_group, amazon_product_url, publisher, published_date, price
-    }:any) => {return <BookPreview title={title} author={author} cover={cover} description={description}key={primary_isbn13} />  }) }
+    }:any) => {return <BookPreview title={title} author={author} cover={cover} description={description} key={primary_isbn13} age={age_group}  />  }) }
             </ul>
         </>
     )
 }
 
-export default Home;
+export default Recommendations;

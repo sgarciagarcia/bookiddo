@@ -4,7 +4,7 @@ import './App.css';
 
 import Loading from './components/Loading';
 import WelcomeForm from './components/welcome/WelcomeForm';
-import Home from './components/Home';
+import Home from './screens/Home';
 import BookCard from './components/books/BookCard';
 import { FormContext } from '././FormContext';
 
@@ -17,7 +17,7 @@ function App() {
   else if (isRegistering) return <WelcomeForm />
     return (
      <Routes>
-       <Route path='/' element={<Home />} />
+       <Route path='/' element={<Home/>} />
        <Route path='/bookCards/:isbn' element={<BookCard/>} />
      </Routes>
     );

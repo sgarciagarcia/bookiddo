@@ -1,9 +1,13 @@
+import Recommendations from '../components/Recommendations';
+import Header from '../components/Header';
 
-import Home from './components/Home';
-
-export default Home = () => {
-    //<Header/>
-    <Home/>
+const Home = () => {
+    return (
+    <>
+    <Header/>
+    <Recommendations/>
+    </>
     //<Menu/>
-
+    )
 }
+export default Home

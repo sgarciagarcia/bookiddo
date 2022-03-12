@@ -1,6 +1,6 @@
 
 
-const BookCard = ({title, author, cover}:any) =>{
+const BookCard = ({title, author, cover, description, age}:any) =>{
     return(
         <li>
         <div>
@@ -8,6 +8,8 @@ const BookCard = ({title, author, cover}:any) =>{
             <h3>{author}</h3>
         </div>
         <img src={cover} alt= {title}/>
+        <span>{age}</span>
+        <p>{description}</p>
         </li>
         )
 }
