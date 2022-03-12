@@ -6,7 +6,7 @@ import { getLocalStorage } from "../../localStorage";
 import SearchResult from '../SearchResult'
 
 const StepFour = () =>{
-  const {kidData, booksData, setBooksData, storeInDatabase, setIsRegistering}:any = useContext(FormContext);
+  const {kidData, booksData, setBooksData, storeInDatabase, setIsRegistering, setIsLoading}:any = useContext(FormContext);
 
   const fetchOneList = async (namelist:string) => {
     const response = await fetch(
@@ -68,6 +68,7 @@ const StepFour = () =>{
 
   const CALL_APIS = async (kidData:any) => {
         try {
+          setIsLoading(true)
           if (kidData.kidAge < 8) { //Pequeños
             const response = await fetchOneList('picture-books') //llamo a lista NYT
             const openLibRes = await Promise.all( //Llamo a OpenLib con el isbn y consigo subjects
@@ -117,6 +118,7 @@ const StepFour = () =>{
         }
   };
   CALL_APIS(kidData);
+  setIsLoading(false)
 
   }, []);
 

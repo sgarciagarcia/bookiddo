@@ -14,6 +14,7 @@ export const FormContext = createContext({});
 const FormContextProvider = ({ children }:any) => {
     const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
     const [isRegistering, setIsRegistering] = useState<boolean>(false);
+    const [isLoading, setIsLoading] = useState<boolean>(false);
 
     const [step, setStep] = useState<number>(1); //el paso inicial es el 1
     type kidDataProps = {
@@ -62,18 +63,19 @@ type booksProps = [{
     
 
     useEffect (() => { // Comprobar si el user está registrado en bbdd una vez se ha logueado
-       
         const checkIfRegistered = async()=> {
+        setIsLoading(true)
+
         if (isLoggedIn) { 
             const exists = await getFromDatabase()
             if (exists === null) {setIsRegistering(true)}
         }
-       } 
-       //Loading true
+        setIsLoading(false)
+       }        
        checkIfRegistered()
-        //Loading false
-
     }, [isLoggedIn])
+
+
 
     const goNextStep = () => {
         setStep(step + 1);
@@ -130,6 +132,8 @@ type booksProps = [{
             setKidData,
             kidData,
             handleLogin,
+            isLoading,
+            setIsLoading,
             isLoggedIn,
             isRegistering,
             setIsRegistering,
