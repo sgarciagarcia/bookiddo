@@ -1,20 +1,16 @@
-import { useContext } from 'react';
 
-import { FormContext } from '../../FormContext'
-
-const StepOne = () =>{
-    const {booksData}:any = useContext(FormContext);
+const SearchResult = ({thisBook}:any) =>{
     return(
         <>
         <div>
-            <h2>{booksData[0].title}</h2>
-            <h3>{booksData[0].author}</h3>
+            <h2>{thisBook.title}</h2>
+            <h3>{thisBook.author}</h3>
         </div>
         <picture>
-        <img src={booksData[0].cover} alt= {booksData[0].title}/>
+        <img src={thisBook.cover} alt= {thisBook.title}/>
         </picture>
         </>
         )
 }
 
-export default StepOne;
+export default SearchResult;

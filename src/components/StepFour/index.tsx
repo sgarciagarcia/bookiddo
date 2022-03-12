@@ -135,8 +135,10 @@ const StepFour = () =>{
     <>
         <h1>Hooray!</h1>
         <p>We have found the perfect book for {kidData.kidName}! </p>
-        <SearchResult/>
-        <button onClick={storeBooks}>See this book</button>
+        <SearchResult thisBook={booksData[0]}/>
+        <Link to={`/bookCards/${booksData[0].isbn}`}>
+          <button onClick={storeBooks}>See this book</button>
+        </Link>
         <button onClick={storeBooks}>Discover more books</button>
 
 </>

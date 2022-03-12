@@ -3,6 +3,7 @@ import { Routes, Route } from 'react-router';
 import './App.css';
 import WelcomeForm from './components/WelcomeForm';
 import Home from './components/Home';
+import BookCard from './components/BookCard';
 import { FormContext } from '././FormContext';
 
 
@@ -15,6 +16,7 @@ function App() {
     return (
      <Routes>
        <Route path='/' element={<Home />} />
+       <Route path='/bookCards/:isbn' element={<BookCard/>} />
      </Routes>
     );
    }
