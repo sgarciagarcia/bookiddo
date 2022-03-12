@@ -8,14 +8,15 @@ import { FormContext } from '././FormContext';
 
 function App() {
   const { isLoggedIn, handleLogin, isRegistering }:any = useContext(FormContext);
-  if (!isLoggedIn && !isRegistering) return <button onClick={handleLogin}> Sign in with Google </button> //si no está logueado se muestra el botón login
-  // else if (!isLoggedIn && isRegistering) return <WelcomeForm />
-  //  return (
-    return <WelcomeForm />
-    // <Routes>
-    //   <Route path='/' element={<Home />} />
-    // </Routes>
-  //  );
+
+  if (!isLoggedIn) return <button onClick={handleLogin}> Sign in with Google </button> //si no está logueado se muestra el botón login
+  // if (isLoading) return <Loading /> 
+  else if (isRegistering) return <WelcomeForm />
+    return (
+     <Routes>
+       <Route path='/' element={<Home />} />
+     </Routes>
+    );
    }
 
 export default App;

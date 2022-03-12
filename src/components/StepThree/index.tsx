@@ -49,7 +49,6 @@ const StepThree = () =>{
        const storeAndNext = () => { //modifica kidData y lo sube a la bbdd
         setKidData((prevState:any) => {
           const newState = {...prevState, selectedTopics}
-          storeInDatabase(newState, getLocalStorage('userId')) 
           return newState
         });
         goNextStep();

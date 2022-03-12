@@ -118,8 +118,13 @@ const StepFour = () =>{
   }, []);
 
   const storeBooks = () => {
-    console.log(booksData);
-    storeInDatabase({books: booksData}, getLocalStorage('userId')) } 
+    const userData = getLocalStorage('userOuthData') 
+    storeInDatabase({
+      ...userData,
+      ...kidData,
+      books: booksData,
+
+    }, userData.userId) } 
 
   return(
     <>
