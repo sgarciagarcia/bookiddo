@@ -1,17 +1,16 @@
 import { useContext } from 'react';
 
-import { FormContext } from '../../FormContext'
+import { FormContext } from '../../../FormContext'
 
 const StepOne = () =>{
 
-    const {goNextStep, getFromDatabase}:any = useContext(FormContext);
-    getFromDatabase()
+    const {goNextStep}:any = useContext(FormContext);
     return(
         <div>
             <h1>Welcome!</h1>
             <p>You and your kid are about to experience the greatest adventure of all: reading!</p>
-            <p>We need to ask you 2 questions first...</p>
-            <button onClick={() => goNextStep()}>Let's Go!</button>
+            <p>We need to ask you 3 questions first...</p>
+            <button onClick={goNextStep}>Let's Go!</button>
         </div>
         )
 }

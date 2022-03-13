@@ -1,7 +1,7 @@
-import { ChangeEvent, useContext } from 'react';
+import { useContext } from 'react';
 
 
-import { FormContext } from '../../FormContext'
+import { FormContext } from '../../../FormContext'
 
 const StepTwo = () =>{
   const {goNextStep, setKidData}:any = useContext(FormContext);

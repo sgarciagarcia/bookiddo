@@ -1,18 +1,17 @@
 import { useContext } from "react";
 
-import { FormContext } from '../../FormContext'
+import { FormContext } from '../FormContext';
 
-import StepOne from "../StepOne";
-import StepTwo from "../StepTwo";
-import StepThree from "../StepThree";
-import StepFour from "../StepFour";
+import StepOne from "../components/welcome/StepOne";
+import StepTwo from "../components/welcome/StepTwo";
+import StepThree from "../components/welcome/StepThree";
+import StepFour from "../components/welcome/StepFour";
 
 
 
 const WelcomeForm = () =>{
     
     const {step}:any = useContext(FormContext);
-    
     
     return (
         <>
@@ -23,7 +22,7 @@ const WelcomeForm = () =>{
         {step === 1 && <StepOne />}
         {step === 2 && <StepTwo/> } 
         {step === 3 && <StepThree/>}
-        {step === 4 && <StepFour/>} 
+        {step === 4 &&<StepFour/>} 
         
        
 

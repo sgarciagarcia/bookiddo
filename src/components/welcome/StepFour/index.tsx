@@ -1,9 +1,14 @@
 import { useContext, useEffect } from "react";
-import { FormContext } from "../../FormContext";
-import { getLocalStorage } from "../../localStorage";
+import {Link} from 'react-router-dom'
+
+import { FormContext } from "../../../FormContext";
+import { getLocalStorage } from "../../../localStorage";
+import SearchResult from '../../search/SearchResult'
+import ResultError from '../../search/ResultError'
+
 
 const StepFour = () =>{
-  const {kidData, booksData, setBooksData, storeInDatabase}:any = useContext(FormContext);
+  const {kidData, booksData, setBooksData, storeInDatabase, setIsRegistering, setIsLoading}:any = useContext(FormContext);
 
   const fetchOneList = async (namelist:string) => {
     const response = await fetch(
@@ -65,6 +70,7 @@ const StepFour = () =>{
 
   const CALL_APIS = async (kidData:any) => {
         try {
+          setIsLoading(true)
           if (kidData.kidAge < 8) { //Pequeños
             const response = await fetchOneList('picture-books') //llamo a lista NYT
             const openLibRes = await Promise.all( //Llamo a OpenLib con el isbn y consigo subjects
@@ -114,17 +120,29 @@ const StepFour = () =>{
         }
   };
   CALL_APIS(kidData);
+  setIsLoading(false)
 
   }, []);
 
   const storeBooks = () => {
-    console.log(booksData);
-    storeInDatabase({books: booksData}, getLocalStorage('userId')) } 
+    setIsRegistering(false)
+    const userData = getLocalStorage('userOuthData') 
+    storeInDatabase({
+      ...userData,
+      ...kidData,
+      books: booksData,
+    }, userData.userId) 
+  } 
 
+  if(booksData.length === 0) return <ResultError/>
   return(
     <>
-        <div>Contenido paso 4</div>
-        <button onClick={storeBooks}>See this book</button>
+        <h1>Hooray!</h1>
+        <p>We have found the perfect book for {kidData.kidName}! </p>
+        <SearchResult thisBook={booksData[0]}/>
+        <Link to={`/bookCards/${booksData[0].isbn}`}>
+          <button onClick={storeBooks}>See this book</button>
+        </Link>
         <button onClick={storeBooks}>Discover more books</button>
 
 </>

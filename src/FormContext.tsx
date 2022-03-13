@@ -13,6 +13,9 @@ export const FormContext = createContext({});
 
 const FormContextProvider = ({ children }:any) => {
     const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+    const [isRegistering, setIsRegistering] = useState<boolean>(false);
+    const [isLoading, setIsLoading] = useState<boolean>(false);
+
     const [step, setStep] = useState<number>(1); //el paso inicial es el 1
     type kidDataProps = {
         kidName: string,
@@ -24,63 +27,8 @@ const FormContextProvider = ({ children }:any) => {
         kidAge:1,
         selectedTopics: []
     }); //los datos del niño que mete el usuario en welcome form
-    type userDataProps = {
-        // token: string,
-        name: string|null,
-        email: string|null,
-        userId: string,
-    }
-    const [userData, setUserData] = useState<userDataProps>({
-        // token: '',
-        name: '',
-        email:'',
-        userId:''
-    }); //los datos del usuario que le pillamos al loguearse
 
-    const goNextStep = () => {
-        setStep(step + 1);
-    }
-    const goPreviousStep = (step:number) => {
-        setStep(step - 1);
-    }
-
-     //Leer database
-     const getFromDatabase = async() => {
-     const userId = getLocalStorage('userId');
-     const dbRef = ref(getDatabase());
-     const dbSnapshot = await get(child(dbRef, `users/${userId}`))
-     if (dbSnapshot.exists()) { //si este user existe en la bbdd muestra sus valores
-        console.log(dbSnapshot.val().selectedTopics);
-       } else {
-         console.log("No data available");
-       }
-    };
-
- //Guardar  en database
-     const storeInDatabase = (dataToStore:any, userId:string) => {
-         const db = getDatabase();
-        update(ref(db, `users/${userId}`), dataToStore);
-      };
-
-      
-   //se lanza al pulsar el botón login con google y se guardan datos del usuario en un estado
-   const handleLogin = async () => {
-        const provider = new GoogleAuthProvider();
-        const auth = getAuth();
-        const result = await signInWithPopup(auth, provider) as any;
-        const dataToStore = {
-            //token: result.user.accessToken, 
-            name: result.user.displayName,
-            email:result.user.email,
-            userId: result.user.uid
-        } 
-        setLocalStorage('userId',dataToStore.userId)
-        storeInDatabase(dataToStore, dataToStore.userId);
-        setIsLoggedIn(true);
-   };
-
-   
-//Context Books Data
+    //Context Books Data
 type booksProps = [{
     isbn:number,
     title:string,
@@ -106,6 +54,71 @@ type booksProps = [{
     price:''
   }])
 
+    type userDataProps = {
+        token: string,
+        name: string|null,
+        email: string|null,
+        userId: string,
+    }
+    
+
+    useEffect (() => { // Comprobar si el user está registrado en bbdd una vez se ha logueado
+        const checkIfRegistered = async()=> {
+        setIsLoading(true)
+        if (isLoggedIn) { 
+            const exists = await getFromDatabase()
+            if (exists === null) {setIsRegistering(true)}
+        }
+        setIsLoading(false)
+       }        
+       checkIfRegistered()
+    }, [isLoggedIn])
+
+
+
+    const goNextStep = () => {
+        setStep(step + 1);
+    }
+    const goPreviousStep = () => {
+        setStep(step - 1);
+    }
+
+     //Leer database
+     const getFromDatabase = async() => {
+        const user = getLocalStorage('userOuthData');
+        const dbRef = ref(getDatabase());
+        const dbSnapshot = await get(child(dbRef, `users/${user.userId}`))
+        if (dbSnapshot.exists()) return dbSnapshot;
+        return null
+    };
+
+    
+
+ //Guardar  en database
+     const storeInDatabase = (dataToStore:any, userId:string) => {
+         const db = getDatabase();
+        update(ref(db, `users/${userId}`), dataToStore);
+      };
+
+      
+   //se lanza al pulsar el botón login con google y se guardan datos del usuario en un estado
+   const handleLogin = async () => {
+        const provider = new GoogleAuthProvider();
+        const auth = getAuth();
+        const result = await signInWithPopup(auth, provider) as any;
+        const dataToStore = {
+            token: result.user.accessToken, 
+            name: result.user.displayName,
+            email:result.user.email,
+            userId: result.user.uid
+        } 
+        setLocalStorage('userOuthData',dataToStore)
+        setIsLoggedIn(true)
+   };
+
+   
+
+
 
 
 
@@ -118,7 +131,11 @@ type booksProps = [{
             setKidData,
             kidData,
             handleLogin,
+            isLoading,
+            setIsLoading,
             isLoggedIn,
+            isRegistering,
+            setIsRegistering,
             storeInDatabase,
             getFromDatabase,
             setBooksData,
