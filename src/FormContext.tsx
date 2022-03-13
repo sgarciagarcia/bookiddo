@@ -79,7 +79,7 @@ type booksProps = [{
     const goNextStep = () => {
         setStep(step + 1);
     }
-    const goPreviousStep = (step:number) => {
+    const goPreviousStep = () => {
         setStep(step - 1);
     }
 

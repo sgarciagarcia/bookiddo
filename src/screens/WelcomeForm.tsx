@@ -13,7 +13,6 @@ const WelcomeForm = () =>{
     
     const {step}:any = useContext(FormContext);
     
-    
     return (
         <>
         {/* Progress bar

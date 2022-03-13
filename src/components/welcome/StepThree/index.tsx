@@ -66,9 +66,7 @@ const StepThree = () =>{
             return <TopicButton key={i} topic={topic} isChecked={isChecked} handleSelectedTopics={handleSelectedTopics} unselectTopics={unselectTopics} />
           }) }
         </ul>
-        <Link to={'/'}>
           <button onClick={goBack}>Back</button>
-        </Link>
         <button onClick={storeAndNext}>Done!</button>
     </div>    
   )
