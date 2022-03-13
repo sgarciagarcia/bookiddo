@@ -1,8 +1,9 @@
 import { useContext } from 'react';
 import { Routes, Route } from 'react-router';
-import './App.css';
+import './App.scss';
 
 import Loading from './components/Loading';
+import Login from './components/Login';
 import WelcomeForm from './screens/WelcomeForm';
 import Home from './screens/Home';
 import BookPage from './screens/BookPage';
@@ -13,9 +14,9 @@ import { FormContext } from '././FormContext';
 
 
 function App() {
-  const { isLoggedIn, handleLogin, isRegistering, isLoading }:any = useContext(FormContext);
+  const { isLoggedIn, isRegistering, isLoading }:any = useContext(FormContext);
 
-  if (!isLoggedIn) return <button onClick={handleLogin}> Sign in with Google </button> //si no está logueado se muestra el botón login
+  if (!isLoggedIn) return <Login/>//si no está logueado se muestra el botón login
   if (isLoading) return <Loading /> 
   else if (isRegistering) return <WelcomeForm />
     return (

@@ -1,0 +1,63 @@
+@use './styles/variables';
+
+/*Mixins*/
+@mixin wrap-center {
+	display:flex;
+  flex-direction:column;
+	justify-content: center;
+  align-items: center;
+}
+
+@mixin centered {
+  align-self: center}
+
+/*Generals and position*/
+body {
+  background:variables.$green-gr;
+}
+.wrapper {
+  height:100vh;
+  @include wrap-center;  
+}
+label {display:none;};
+.divider {
+  display:flex;
+  flex:0.2;
+}
+
+
+/*Fonts*/
+*{font-family: variables.$signika}
+h1, h2, h3 {
+  margin:0;
+  color: variables.$white;
+}
+h1{font-size: 3em}
+h2{font-size: 2em}
+h3{font-size: 1.5em}
+p, button{font-size: 1em}
+span{font-size: 13pt}
+li{list-style: none;}
+
+/*Buttons*/
+button {
+  border:none;
+  border-radius:5px;
+  color:white;
+  padding:10px;
+  &hover {
+    cursor:pointer;
+  }
+}
+.primary-button {
+  background-color:variables.$primary-color;
+}
+.secondary-button {
+  background-color:variables.$secondary-color;
+}
+
+.third-button { 
+  background-color:variables.$yellow; 
+  color:variables.$dark-yellow
+}
+.centered-button {@include centered}

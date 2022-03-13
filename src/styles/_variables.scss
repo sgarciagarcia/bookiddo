@@ -2,9 +2,14 @@
 $white: #ffffff;
 $primary-color: #0BB5C9;
 $secondary-color: #EA1F9E;
-$third-color: #F6E57F;
+$yellow: #F6E57F;
+$dark-yellow: #8B7A14;
 
 /*Gradients*/
-$green-gr: linear-gradient(183deg, rgba(16,181,212,1) 0%, rgba(0,183,175,1) 100%); 
-$pink-gr:  linear-gradient(183deg, rgba(234,31,158,1) 0%, rgba(245,174,219,1) 100%); 
-$pink-yellow-gr:  linear-gradient(183deg, rgba(234,31,158,1) 0%, rgba(238,214,176,1) 100%); 
+$green-gr: linear-gradient(180deg, rgba(16,181,212,1) 0%, rgba(0,183,175,1) 100%); 
+$pink-gr:  linear-gradient(180deg, rgba(234,31,158,1) 0%, rgba(245,174,219,1) 100%); 
+$pink-yellow-gr:  linear-gradient(180deg, rgba(234,31,158,1) 0%, rgba(238,214,176,1) 100%); 
+
+/*Fonts*/
+$signika: 'Signika', Arial, sans-serif;
+
