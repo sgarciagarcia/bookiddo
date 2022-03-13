@@ -8,7 +8,7 @@ import TopicButton from '../../welcome/TopicButton';
 
 const ResultError = () =>{
     const {kidData, goPreviousStep}:any = useContext(FormContext);
-
+  
    
     return(
         <>
