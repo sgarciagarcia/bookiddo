@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1920" height="1080" viewBox="0 0 1920 1080">
+  <defs>
+    <clipPath id="clip-path">
+      <rect id="Rectángulo_239" data-name="Rectángulo 239" width="1920" height="1080" fill="#fff" stroke="#707070" stroke-width="1"/>
+    </clipPath>
+    <linearGradient id="linear-gradient" x1="0.5" x2="0.5" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#ea1f9e"/>
+      <stop offset="1" stop-color="#f5aedb"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-2" x1="0.5" x2="0.5" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#00b8ce"/>
+      <stop offset="0.867" stop-color="#00b8ce"/>
+      <stop offset="1" stop-color="#00b7af"/>
+    </linearGradient>
+  </defs>
+  <g id="Enmascarar_grupo_38" data-name="Enmascarar grupo 38" clip-path="url(#clip-path)">
+    <g id="Grupo_462" data-name="Grupo 462" transform="translate(-537.883 -1518.525)">
+      <path id="Wave" d="M-1350.406,4266.439s-141.76,77.847-774.717-18.615-734.567,84.546-1071.3,78.02S-3318.7,3884.449-3318.7,3884.449l1934.737-95.958Z" transform="translate(3852.632 -1758.967)" fill="url(#linear-gradient)"/>
+      <ellipse id="Elipse" cx="1438.441" cy="1221.442" rx="1438.441" ry="1221.442" fill="url(#linear-gradient-2)"/>
+    </g>
+  </g>
+</svg>
