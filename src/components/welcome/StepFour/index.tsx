@@ -3,7 +3,9 @@ import {Link} from 'react-router-dom'
 
 import { FormContext } from "../../../FormContext";
 import { getLocalStorage } from "../../../localStorage";
-import SearchResult from '../../SearchResult'
+import SearchResult from '../../search/SearchResult'
+import ResultError from '../../search/ResultError'
+
 
 const StepFour = () =>{
   const {kidData, booksData, setBooksData, storeInDatabase, setIsRegistering, setIsLoading}:any = useContext(FormContext);
@@ -131,6 +133,8 @@ const StepFour = () =>{
       books: booksData,
     }, userData.userId) 
   } 
+
+  if(booksData.length === 0) return <ResultError/>
   return(
     <>
         <h1>Hooray!</h1>

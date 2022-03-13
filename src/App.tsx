@@ -3,9 +3,9 @@ import { Routes, Route } from 'react-router';
 import './App.css';
 
 import Loading from './components/Loading';
-import WelcomeForm from './components/welcome/WelcomeForm';
+import WelcomeForm from './screens/WelcomeForm';
 import Home from './screens/Home';
-import BookCard from './components/books/BookCard';
+import BookPage from './screens/BookPage';
 import { FormContext } from '././FormContext';
 
 
@@ -18,7 +18,7 @@ function App() {
     return (
      <Routes>
        <Route path='/' element={<Home/>} />
-       <Route path='/bookCards/:isbn' element={<BookCard/>} />
+       <Route path='/bookCards/:isbn' element={<BookPage/>} />
      </Routes>
     );
    }

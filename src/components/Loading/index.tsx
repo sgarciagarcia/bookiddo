@@ -1,10 +1,11 @@
+import loader from '../../images/loader.gif'
 
 const Loading = () => {
     
     return (
       <>
       <p>loading....</p>
-      <img src='../images/loader.png' alt='Loading content...'/>
+      <img src={loader} alt='Loading content...'/>
       </>
     )
   }
