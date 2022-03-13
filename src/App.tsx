@@ -6,6 +6,9 @@ import Loading from './components/Loading';
 import WelcomeForm from './screens/WelcomeForm';
 import Home from './screens/Home';
 import BookPage from './screens/BookPage';
+import Favorites from './screens/Favorites';
+import Account from './screens/Account';
+
 import { FormContext } from '././FormContext';
 
 
@@ -18,8 +21,8 @@ function App() {
     return (
      <Routes>
        <Route path='/' element={<Home/>} />
-       {/* <Route path='/favorites' element={<Favorites/>} />
-       <Route path='/account' element={<Account/>} /> */}
+        <Route path='/favorites' element={<Favorites/>} />
+       <Route path='/account' element={<Account/>} /> 
        <Route path='/bookCards/:isbn' element={<BookPage/>} />
      </Routes>
     );
