@@ -18,6 +18,8 @@ function App() {
     return (
      <Routes>
        <Route path='/' element={<Home/>} />
+       {/* <Route path='/favorites' element={<Favorites/>} />
+       <Route path='/account' element={<Account/>} /> */}
        <Route path='/bookCards/:isbn' element={<BookPage/>} />
      </Routes>
     );
