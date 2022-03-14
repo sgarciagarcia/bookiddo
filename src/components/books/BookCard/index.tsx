@@ -11,9 +11,9 @@ const BookCard = (title:string, author:string, cover:string) =>{
     
     return(
         <div>
-        <div>
-            <h2>{thisBook[0].title}</h2>
-            <h3>{thisBook[0].author}</h3>
+        <div className="floating-info">
+            <h2 >{thisBook[0].title}</h2>
+            <h3 >{thisBook[0].author}</h3>
         </div>
         <div>
             <picture>
@@ -23,9 +23,9 @@ const BookCard = (title:string, author:string, cover:string) =>{
             <a href={`${thisBook[0].amazon}`}><button>Comprar</button></a>
             <button>Agregar a favs</button>
         </div>
-        <h3>{thisBook[0].price}</h3>
-        <h4>{thisBook[0].author} {thisBook[0].publisher}</h4>
-        <p>{thisBook[0].description}</p>
+        <h3 >{thisBook[0].price}</h3>
+        <h4 >{thisBook[0].author} {thisBook[0].publisher}</h4>
+        <p >{thisBook[0].description}</p>
         </div>
         )
 }

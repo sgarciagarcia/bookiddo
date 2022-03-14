@@ -7,12 +7,12 @@ const BookPreview = ({title, author, cover, description, age, isbn}:any) =>{
 
     return(
         <li>
-        <div>
+        <div className="floating-info">
             <h2>{title}</h2>
             <h3>{author}</h3>
         </div>
          <Link to={`/bookCards/${isbn}`}>
-        <img src={cover} alt= {title}/>
+        <div className="book-preview" style={{ backgroundImage: `url(${cover})` }}></div>
         </Link>
         <span>{age}</span>
         <p>{description}</p>
