@@ -6,7 +6,6 @@ import BookPreview from '../books/BookPreview';
 
 const Recommendations = () =>{
     const {setKidData, kidData, getFromDatabase, setIsLoading, setBooksData, booksData}:any = useContext(FormContext);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     useEffect (()=>{
         const loadBooks = async()=> {
             setIsLoading(true)
@@ -16,7 +15,9 @@ const Recommendations = () =>{
             setKidData(recs.val()) 
         }
         if (booksData[0].isbn === 0){loadBooks()}
-    }, [])
+    },     
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [])
     return (
         <div className='bg-white'>
         <h1 className='title'>Stories for {kidData.kidName}: </h1>
