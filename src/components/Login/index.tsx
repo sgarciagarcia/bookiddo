@@ -11,7 +11,7 @@ const Menu = () => {
         <div className="wrapper">
             <picture><img src={logo} alt="Bookiddo logo"/></picture>
             <h1 className="txt-white">bookiddo</h1>
-            <h3 className="cursive txt-white">Read to grow up!</h3>
+            <h2 className="cursive txt-white">Read to grow up!</h2>
             <div className="divider">
             <button className="centered-button third-button" onClick={handleLogin}> Sign in with Google </button> 
             </div>

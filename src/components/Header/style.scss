@@ -1,6 +1,6 @@
 @use '../../styles/variables';
 
-img.logo {width: 30px}
+img.logo {width: 40px}
 .header-wrap{
     position:relative;
     padding:12px;
@@ -16,3 +16,9 @@ img.logo {width: 30px}
     line-height: 0;
     fill: #00B7AF;
 }
+
+.waves svg {
+    position: relative;
+    display: block;
+    width: calc(116% + 1.3px);
+    height: 100px;}
