@@ -7,7 +7,6 @@ import TopicButton from "../components/welcome/TopicButton";
 
 const Account = () => {
     const { setIsLoading, getFromDatabase, setKidData, kidData} = useContext(FormContext);
-// eslint-disable-next-line react-hooks/exhaustive-deps
     useEffect (()=>{
         const loadInfo = async()=> {
             setIsLoading(true)
@@ -17,7 +16,8 @@ const Account = () => {
         }
         loadInfo()
         setIsLoading(false)
-    }, [])
+    }, // eslint-disable-next-line react-hooks/exhaustive-deps
+    [])
     
     return(
         <>
