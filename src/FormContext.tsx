@@ -1,12 +1,12 @@
 import { createContext, useEffect, useState } from 'react';
 import { getDatabase, ref, update, child, get} from "firebase/database";
-import { getAuth, signInWithRedirect, GoogleAuthProvider, getRedirectResult } from 'firebase/auth';
+import { getAuth, signInWithRedirect, signOut, GoogleAuthProvider, getRedirectResult } from 'firebase/auth';
 import { isExpired } from 'react-jwt';
 
 
 // import reducer from './store/reducer';
 // import { FORM_ACTIONS } from './store/actions';
-import { getLocalStorage, setLocalStorage } from './localStorage';
+import { getLocalStorage, setLocalStorage, removeLocalStorage } from './localStorage';
 
 
 export const FormContext = createContext({});
@@ -104,7 +104,8 @@ type booksProps = [{
         setIsLoading(false)
        }        
        checkIfRegistered()
-    }, [isLoggedIn])
+    },     // eslint-disable-next-line react-hooks/exhaustive-deps
+    [isLoggedIn])
 
 
 
@@ -140,7 +141,12 @@ type booksProps = [{
         
    };
 
-   
+   const handleLogOut = async () => {
+    const auth = getAuth();
+    await signOut(auth);
+    removeLocalStorage('userOuthData');
+    setIsLoggedIn(false);
+  }
 
 
 
@@ -155,6 +161,7 @@ type booksProps = [{
             setKidData,
             kidData,
             handleLogin,
+            handleLogOut,
             isLoading,
             setIsLoading,
             isLoggedIn,

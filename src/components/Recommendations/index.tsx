@@ -23,9 +23,9 @@ const Recommendations = () =>{
         <h1 className='title'>Stories for {kidData.kidName}: </h1>
         <ul>
             {booksData.map (({
-      isbn, title, author, cover, description,age_group, amazon_product_url, publisher, published_date, price, i
-    }:any) => {return <BookPreview title={title} author={author} cover={cover} description={description} key={i} isbn={isbn} age={age_group}  />  }) }
-            </ul>
+            isbn, title, author, cover, description,age_group, amazon_product_url, publisher, published_date, price
+            }:any) => {return <BookPreview title={title} author={author} cover={cover} description={description} key={isbn} isbn={isbn} age={age_group}  />  }) }
+        </ul>
         </div>
     )
 }
