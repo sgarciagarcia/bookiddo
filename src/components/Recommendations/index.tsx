@@ -6,7 +6,7 @@ import BookPreview from '../books/BookPreview';
 
 const Recommendations = () =>{
     const {setKidData, kidData, getFromDatabase, setIsLoading, setBooksData, booksData}:any = useContext(FormContext);
-    
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     useEffect (()=>{
         const loadBooks = async()=> {
             setIsLoading(true)
