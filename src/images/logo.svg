@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="149.636" height="164.271" viewBox="0 0 149.636 164.271">
+  <g id="loader" transform="translate(1976 -2131)">
+    <g id="circle" transform="translate(2)">
+      <circle id="Elipse_103" data-name="Elipse 103" cx="66" cy="66" r="66" transform="translate(-1970 2136)" fill="#fff" opacity="0"/>
+      <circle id="Elipse_100" data-name="Elipse 100" cx="7.729" cy="7.729" r="7.729" transform="translate(-1953.365 2146.459)" fill="#fff"/>
+      <circle id="Elipse_102" data-name="Elipse 102" cx="7.729" cy="7.729" r="7.729" transform="translate(-1864.48 2146.459)" fill="#fff"/>
+      <circle id="Elipse_101" data-name="Elipse 101" cx="7.729" cy="7.729" r="7.729" transform="translate(-1908.647 2131)" fill="#fff"/>
+    </g>
+    <path id="Unión_21" data-name="Unión 21" d="M35.758,102.033h-.04L0,72.608V.274s2.061-.133,1.83,0C39.918,12.45,62.593,34.889,75.981,55.6,100.042,14.856,149.636,0,149.636,0V74.594l-37.61,27.439-36.454,30Z" transform="translate(-1976 2163.243)" fill="#fff"/>
+    <path id="Unión_22" data-name="Unión 22" d="M14.594,41.642h-.016L0,29.633V.112s.841-.054.747,0c15.544,4.969,24.8,14.127,30.262,22.581C40.829,6.063,61.069,0,61.069,0V30.443L45.72,41.642,30.842,53.883Z" transform="translate(-1931.676 2231.05)" fill="#0bb6c9"/>
+  </g>
+</svg>

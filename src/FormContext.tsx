@@ -1,7 +1,7 @@
 import { createContext, useEffect, useState } from 'react';
-import { getDatabase, ref, update, child, get, set } from "firebase/database";
+import { getDatabase, ref, update, child, get} from "firebase/database";
 import { getAuth, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
-import { resourceLimits } from 'worker_threads';
+
 
 
 // import reducer from './store/reducer';
@@ -53,14 +53,6 @@ type booksProps = [{
     subject:[],
     price:''
   }])
-
-    type userDataProps = {
-        token: string,
-        name: string|null,
-        email: string|null,
-        userId: string,
-    }
-    
 
     useEffect (() => { // Comprobar si el user está registrado en bbdd una vez se ha logueado
         const checkIfRegistered = async()=> {

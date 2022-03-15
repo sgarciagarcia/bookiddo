@@ -1,0 +1,11 @@
+@use '../../styles/variables';
+
+.txt-white{color:variables.$white;}
+
+.cursive {font-family:'Pacifico', cursive}
+body {
+    background-image:url('../../images/bg.svg');
+    background-size:cover;
+    background-repeat:no-repeat;
+    background-color:#fff;
+}

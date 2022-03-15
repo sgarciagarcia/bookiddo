@@ -10,8 +10,6 @@ const firebaseConfig = {
   storageBucket: "bookiddo-1e2dc.appspot.com",
   messagingSenderId: "696715108783",
   appId: "1:696715108783:web:ee13248d1361f2d8144f5a",
-  // for the db
-  databaseURL: 'https://bookiddo-1e2dc-default-rtdb.europe-west1.firebasedatabase.app/'
 };
 
 export const firebaseApp = initializeApp(firebaseConfig);
