@@ -14,7 +14,7 @@ const Recommendations = () =>{
             setBooksData(recs.val().books)
             setKidData(recs.val()) 
         }
-        if (booksData[0].isbn === 0){loadBooks()}
+        if (booksData[0].isbn === 0 || typeof booksData === undefined){loadBooks()}
     },     
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [])
