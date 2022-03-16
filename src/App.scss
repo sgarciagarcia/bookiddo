@@ -7,7 +7,6 @@
 	justify-content: center;
   align-items: center;
 }
-
 @mixin centered {
   align-self: center}
 
@@ -15,7 +14,11 @@
 body {
   background:variables.$white;
 }
+.h100{
+  height:100vh;
+}
 .wrapper {
+  padding:20px;
   @include wrap-center;  
 }
 label {display:none;};
@@ -28,7 +31,6 @@ label {display:none;};
   padding:10px;
   background-color: variables.$white;
 }
-
 .horizontal-grid {
   display: flex;
   flex-direction: row;
@@ -48,19 +50,25 @@ h3{font-size: 1.5em}
 p, button{font-size: 1.3em}
 span{font-size: 13pt}
 li{list-style: none;}
-
-h1.title {
+.title {
   padding-top:40px;
   color:variables.$primary-color; 
   opacity:0.3;
 }
-
+.title.white {
+  font-size:3em; 
+  color:white;
+  opacity:1;
+  text-align:left;}
 .floating-info {
   position: relative;
   top: 30px;
   left: -20px;
 }
-
+.intro {
+  color:variables.$yellow;
+  font-size:2em;
+}
 .box-description{
   max-width:350px;
   background-color: white;
@@ -100,10 +108,10 @@ button {
 .secondary-button {
   background-color:variables.$secondary-color;
 }
-
 .third-button { 
   background-color:variables.$yellow; 
-  color:variables.$dark-yellow
+  color:variables.$dark-yellow;
+  width:250px;
 }
 .centered-button {@include centered}
 
@@ -117,3 +125,5 @@ button {
   background-position: center;
   border-radius:10px;
 }
+
+/*Form*/

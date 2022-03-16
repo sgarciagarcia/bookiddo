@@ -18,9 +18,10 @@ const StepTwo = () =>{
       };
 
     return(
-        <div>
-            <h2>What is your kid's name?</h2>
+      <div className="h100 wrapper">
             <form onSubmit={handleSubmit}>
+            <h2 className="title white">What is your kid's name?</h2>
+
                 <label>Name: </label>
                 <input 
                 type="text"
@@ -28,7 +29,7 @@ const StepTwo = () =>{
                 autoFocus={true}
                 placeholder="Write the name..."></input>
 
-                <h3>How old is your kid?</h3>
+                <p className="intro">How old is your kid?</p>
                 <input type="number" min="1" name="kidAge" ></input>
                 <button type="submit">Next!</button>
             </form>
