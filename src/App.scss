@@ -16,7 +16,6 @@ body {
   background:variables.$white;
 }
 .wrapper {
-  height:100vh;
   @include wrap-center;  
 }
 label {display:none;};
@@ -28,6 +27,13 @@ label {display:none;};
 .bg-white {
   padding:10px;
   background-color: variables.$white;
+}
+
+.horizontal-grid {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
 }
 
 /*Fonts and titles*/
@@ -56,6 +62,7 @@ h1.title {
 }
 
 .box-description{
+  max-width:350px;
   background-color: white;
   -webkit-box-shadow: 3px 5px 15px 0px #CDCDCD;
   box-shadow: 3px 5px 15px 0px #CDCDCD;

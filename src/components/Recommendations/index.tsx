@@ -21,11 +21,13 @@ const Recommendations = () =>{
     return (
         <div className='bg-white'>
         <h1 className='title'>Stories for {kidData.kidName}: </h1>
-        <ul>
+        <div className="wrapper">
+        <ul className="horizontal-grid">
             {booksData.map (({
             isbn, title, author, cover, description,age_group, amazon_product_url, publisher, published_date, price
             }:any) => {return <BookPreview title={title} author={author} cover={cover} description={description} key={isbn} isbn={isbn} age={age_group}  />  }) }
         </ul>
+        </div>
         </div>
     )
 }
