@@ -24,6 +24,7 @@ label {display:none;};
   display:flex;
   flex:0.2;
 }
+.spacer {flex:1}
 .bg-white {
   padding:10px;
   background-color: variables.$white;
