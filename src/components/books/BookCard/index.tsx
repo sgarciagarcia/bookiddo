@@ -2,6 +2,10 @@
 import { useParams } from 'react-router';
 import { useContext } from 'react';
 
+import '../../../styles/fonts.scss';
+import '../../../styles/buttons.scss';
+import '../../../styles/spacing.scss';
+
 import { FormContext } from '../../../FormContext';
 
 const BookCard = (title:string, author:string, cover:string) =>{

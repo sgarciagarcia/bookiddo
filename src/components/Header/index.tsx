@@ -1,7 +1,12 @@
 import { useContext } from 'react';
 
 import logo from '../../images/logo.svg';
+
+import '../../styles/fonts.scss';
+import '../../styles/buttons.scss';
+import '../../styles/spacing.scss';
 import './style.scss';
+
 import { FormContext } from'../../FormContext';
 
 

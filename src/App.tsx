@@ -1,6 +1,9 @@
 import { useContext } from 'react';
 import { Routes, Route } from 'react-router';
-import './App.scss';
+
+import './styles/fonts.scss';
+import './styles/buttons.scss';
+import './styles/spacing.scss';
 
 import Loading from './components/Loading';
 import Login from './components/Login';

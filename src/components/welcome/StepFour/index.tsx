@@ -1,6 +1,10 @@
 import { useContext, useEffect } from "react";
 import {Link} from 'react-router-dom'
 
+import '../../../styles/fonts.scss'
+import '../../../styles/buttons.scss';
+import '../../../styles/spacing.scss';
+
 import { FormContext } from "../../../FormContext";
 import { getLocalStorage } from "../../../localStorage";
 import SearchResult from '../../search/SearchResult'

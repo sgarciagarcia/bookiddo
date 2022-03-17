@@ -1,0 +1,47 @@
+@use './variables';
+
+/*Generals and position*/
+/*Mixins*/
+@mixin wrap-center {
+	display:flex;
+  flex-direction:column;
+	justify-content: center;
+  align-items: center;
+}
+
+
+body {
+  background:variables.$white;
+}
+.h100{
+  height:100vh;
+}
+.wrapper {
+  padding:20px;
+  @include wrap-center;  
+}
+label {display:none;};
+.divider {
+  display:flex;
+  flex:0.2;
+}
+.spacer {flex:1}
+.bg-white {
+  padding:10px;
+  background-color: variables.$white;
+  min-height:100vh;
+}
+.hidden {opacity:0;}
+
+.horizontal-grid {
+  min-width:70%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+.horizontal-grid li {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}

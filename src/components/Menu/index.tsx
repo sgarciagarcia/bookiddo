@@ -1,9 +1,12 @@
 import {Link} from 'react-router-dom';
+import '../../styles/fonts.scss';
+import '../../styles/buttons.scss';
+import '../../styles/spacing.scss';
+import './style.scss';
 
 import home from '../../images/home.png';
 import fav from '../../images/fav.png';
 import account from '../../images/account.png';
-import './style.scss';
 
 const Menu = () => {
     

@@ -1,6 +1,10 @@
 import { useContext, useEffect, useState } from "react";
 
+import '../../styles/fonts.scss';
+import '../../styles/buttons.scss';
+import '../../styles/spacing.scss';
 import './style.scss';
+
 import { FormContext } from '../../FormContext';
 import BookPreview from '../books/BookPreview';
 import Loading from '../Loading';
@@ -31,8 +35,7 @@ const Recommendations = () =>{
         <div className="wrapper">
         <ul className="horizontal-grid">
             {booksData && booksData.map (({
-            isbn, title, author, cover, description,age_group, amazon_product_url, publisher, published_date, price
-            }:any) => {return <BookPreview title={title} author={author} cover={cover} description={description} key={isbn} isbn={isbn} age={age_group}  />  }) }
+            isbn, title, author, cover, description,age_group }:any) => {return <BookPreview title={title} author={author} cover={cover} description={description} key={isbn} isbn={isbn} age={age_group}  />  }) }
         </ul>
         </div>
         </div>

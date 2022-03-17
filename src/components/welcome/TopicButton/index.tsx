@@ -1,3 +1,4 @@
+import '../../../styles/buttons.scss';
 
 const TopicButton = ({topic, handleSelectedTopics, unselectTopics, isChecked}:any) => {
   const handleClick =() => {
@@ -9,7 +10,7 @@ const TopicButton = ({topic, handleSelectedTopics, unselectTopics, isChecked}:an
   }
   return (
     
-    <li className={ `${isChecked ? 'bg-pink': 'bg-white'} `} onClick={ isChecked ? handleUnclick : handleClick}>{topic}</li>
+    <li className={ `${isChecked ? 'secondary-button': 'third-button'} `} onClick={ isChecked ? handleUnclick : handleClick}>{topic}</li>
   )
 }
 

@@ -1,7 +1,12 @@
 import { useContext } from 'react';
 
+import '../../../styles/fonts.scss';
+import '../../../styles/buttons.scss';
+import '../../../styles/spacing.scss';
+import './style.scss';
 
 import { FormContext } from '../../../FormContext'
+
 
 const StepTwo = () =>{
   const {goNextStep, setKidData}:any = useContext(FormContext);
@@ -30,8 +35,8 @@ const StepTwo = () =>{
                 placeholder="Write the name..."></input>
 
                 <p className="intro">How old is your kid?</p>
-                <input type="number" min="1" name="kidAge" ></input>
-                <button type="submit">Next!</button>
+                <input type="number" min="1" max="17" name="kidAge" placeholder="Type a number..."></input>
+                <button type="submit" className="third-button">Next!</button>
             </form>
         </div>
         )}

@@ -1,5 +1,10 @@
 import { useContext, useState } from "react";
 
+import '../../../styles/fonts.scss';
+import '../../../styles/buttons.scss';
+import '../../../styles/spacing.scss';
+
+
 import { FormContext } from "../../../FormContext";
 import TopicButton from "../../welcome/TopicButton";
 

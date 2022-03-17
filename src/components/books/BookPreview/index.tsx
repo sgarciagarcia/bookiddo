@@ -1,5 +1,10 @@
 import {Link} from 'react-router-dom';
 
+import '../../../styles/fonts.scss';
+import '../../../styles/buttons.scss';
+import '../../../styles/spacing.scss';
+import './style.scss';
+
 const BookPreview = ({title, author, cover, description, age, isbn}:any) =>{
 
     return(
@@ -15,7 +20,7 @@ const BookPreview = ({title, author, cover, description, age, isbn}:any) =>{
         </div>
       
         </Link>
-        <p className="box-description">{description}</p>
+        <p className="box-description">{description !== '' ? description : 'Description not found'}</p>
         </li>
         )
 }

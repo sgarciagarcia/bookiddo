@@ -1,6 +1,10 @@
 import { useContext } from 'react';
 
-import './style.scss'
+import '../../styles/fonts.scss';
+import '../../styles/buttons.scss';
+import '../../styles/spacing.scss';
+import './style.scss';
+
 import logo from '../../images/loader.gif'
 import { FormContext } from '../../FormContext'
 
