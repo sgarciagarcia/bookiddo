@@ -32,10 +32,10 @@ const StepTwo = () =>{
                 type="text"
                 name="kidName"
                 autoFocus={true}
-                placeholder="Write the name..."></input>
+                placeholder="Write the name..." required></input>
 
                 <p className="intro">How old is your kid?</p>
-                <input type="number" min="1" max="17" name="kidAge" placeholder="Type a number..."></input>
+                <input type="number" min="1" max="17" name="kidAge" placeholder="Type a number..." required></input>
                 <button type="submit" className="third-button">Next!</button>
             </form>
         </div>

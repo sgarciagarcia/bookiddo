@@ -61,17 +61,17 @@ const StepThree = () =>{
   };
   
   return(
-    <div>
-        <h2>What does {kidData.kidName} like?</h2>
+    <div className="wrapper h100">
+        <h2 className="title white">What does {kidData.kidName} like?</h2>
         <p>(Choose 4)</p>
-        <ul className="keyboard">
+        <ul className="horizontal-grid">
           {topicNames.map((topic:any, i:any) => {
             const isChecked = selectedTopics.includes(topic)
             return <TopicButton key={i} topic={topic} isChecked={isChecked} handleSelectedTopics={handleSelectedTopics} unselectTopics={unselectTopics} />
           }) }
         </ul>
-          <button onClick={goBack}>Back</button>
-        <button onClick={storeAndNext}>Done!</button>
+          <button className="third-button topic ghost" onClick={goBack}>Back</button>
+        <button className="third-button topic" onClick={storeAndNext}>Done!</button>
     </div>    
   )
 }

@@ -10,7 +10,7 @@ const TopicButton = ({topic, handleSelectedTopics, unselectTopics, isChecked}:an
   }
   return (
     
-    <li className={ `${isChecked ? 'secondary-button': 'third-button'} `} onClick={ isChecked ? handleUnclick : handleClick}>{topic}</li>
+    <li className={ `topic ${isChecked ? 'secondary-button': 'white-button'} `} onClick={ isChecked ? handleUnclick : handleClick}>{topic}</li>
   )
 }
 

@@ -9,9 +9,12 @@ h1, h2, h3 {
 h1{font-size: 3em}
 h2{font-size: 2em}
 h3{font-size: 1.5em}
-p, button{font-size: 1.3em}
+p, button, li{font-size: 1.3em}
 span{font-size: 13pt}
-li{list-style: none;}
+ul {padding-left:0;}
+li{
+  list-style: none;
+}
 .title {
   padding-top:40px;
   color:variables.$primary-color; 

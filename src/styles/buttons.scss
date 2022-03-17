@@ -4,7 +4,7 @@
 @mixin centered {
     align-self: center}
 /*Buttons*/
-button {
+button, .topic {
     border:none;
     border-radius:5px;
     color:white;
@@ -14,14 +14,30 @@ button {
       cursor:pointer;
     }
   }
+  .topic {margin:10px;}
   .primary-button {
     background-color:variables.$primary-color;
+    &.ghost {
+      border: 1px solid variables.$primary-color;
+      background-color:transparent;
+    }
   }
   .secondary-button {
     background-color:variables.$secondary-color;
+    &.ghost {
+      border: 1px solid variables.$secondary-color;
+      background-color:transparent;
+    }
   }
   .third-button { 
     background-color:variables.$yellow; 
     color:variables.$dark-yellow;
+    &.ghost {
+      border: 1px solid variables.$yellow;
+      background-color:transparent;
+    }
+  }
+  .white-button {background-color:variables.$white; 
+    color:variables.$black;
   }
   .centered-button {@include centered}

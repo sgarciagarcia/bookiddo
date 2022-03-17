@@ -12,7 +12,7 @@ const Menu = () => {
     const {handleLogin}:any = useContext(FormContext);
 
     return (
-        <div className="h100 wrapper">
+        <div className="h100 wrapper centered">
             <picture><img src={logo} alt="Bookiddo logo"/></picture>
             <h1 className="txt-white">bookiddo</h1>
             <h2 className="cursive txt-white">Read to grow up!</h2>
