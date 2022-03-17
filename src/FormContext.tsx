@@ -80,6 +80,7 @@ type booksProps = [{
                 userId: result.user.uid
             } 
             setLocalStorage('userOuthData',dataToStore)
+            setUserLocalData(dataToStore);
             setIsLoggedIn(true)
           } else {
               const userData = getLocalStorage('userOuthData');
@@ -120,7 +121,7 @@ type booksProps = [{
      const getFromDatabase = async() => {
         const dbRef = ref(getDatabase());
         const dbSnapshot = await get(child(dbRef, `users/${userLocalData.userId}`))
-        if (dbSnapshot.exists()) return dbSnapshot;
+        if (dbSnapshot.exists()) return dbSnapshot.val();
         return null
     };
 
@@ -171,6 +172,7 @@ type booksProps = [{
             getFromDatabase,
             setBooksData,
             booksData,
+            userLocalData,
         }}>
             {children}
         </FormContext.Provider>
