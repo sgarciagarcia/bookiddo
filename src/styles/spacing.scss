@@ -36,10 +36,14 @@ label {display:none;};
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: flex-start;}
+  justify-content: center;
+  &.left{justify-content: left;};  
+
+}
 
 .horizontal-grid li {
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
+  justify-content: flex-start;
+  margin:15px;
 }
