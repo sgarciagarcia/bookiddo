@@ -22,14 +22,19 @@ button, .topic {
       color:variables.$primary-color;
       background-color:transparent;
     }
+    &:hover {background-color:variables.$primary-color-hover;}
   }
   .secondary-button {
     background-color:variables.$secondary-color;
+    display: flex;
+    justify-content: center;
+    margin:10px;
     &.ghost {
       border: 2px solid variables.$secondary-color;
       color:variables.$secondary-color;
       background-color:transparent;
     }
+    &:hover {background-color:variables.$secondary-color-hover;}
   }
   .third-button { 
     background-color:variables.$yellow; 
@@ -38,10 +43,16 @@ button, .topic {
       border: 2px solid variables.$yellow;
       background-color:transparent;
       color:variables.$yellow;
-
     }
+    &:hover {background-color:variables.$yellow-hover;}
   }
   .white-button {background-color:variables.$white; 
     color:variables.$black;
   }
   .centered-button {@include centered}
+  .button-wrapper {
+    display:flex;
+    position: relative;
+    top: -50px;
+  }
+  

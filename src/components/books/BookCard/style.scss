@@ -1,0 +1,19 @@
+@use '../../../styles/variables';
+.bg-shape {
+    background-image:url('../../../images/bg2.svg');
+    background-size:contain;
+    background-repeat:no-repeat;
+    background-color:#fff;
+}
+
+.floating-info h1 {
+    white-space: normal;
+    overflow: visible;
+}
+
+@media screen and (min-width:750px) {
+    .bg-shape {
+        background-image:none;}
+    .title.white {color:variables.$primary-color}
+
+}

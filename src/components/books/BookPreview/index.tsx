@@ -15,7 +15,7 @@ const BookPreview = ({title, author, cover, description, age, isbn}:any) =>{
         </div>
          <Link to={`/bookCards/${isbn}`}>
         <div className="cover-preview" style={{ backgroundImage: `linear-gradient(180deg, rgba(16,181,212,0.7) 0%, rgba(0,183,175,0) 100%), url(${cover})` }}>
-            { age !== '' && <span className ="bubble"> {age}</span> }
+            { age !== '' && <span className ="bubble age"> {age}</span> }
             
         </div>
       

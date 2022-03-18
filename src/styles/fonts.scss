@@ -15,6 +15,10 @@ ul {padding-left:0;}
 li{
   list-style: none;
 }
+a { 
+  text-decoration: none;
+  &:active {color:variables.$primary-color}
+}
 .title {
   padding-top:40px;
   color:variables.$primary-color; 
@@ -30,7 +34,12 @@ li{
   top: 30px;
   left: -20px;
 }
-.floating-info h2 {width:350px;}
+.floating-info h2, .floating-info h1, .floating-info h3 {
+  width:350px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;}
+
 .intro {
   color:variables.$yellow;
   font-size:2em;
@@ -47,15 +56,17 @@ li{
   top: -30px;
   left: -20px;
 }
+
 .bubble {
+  display: flex;    
+  align-items: center;
   border-radius: 100%;
   box-shadow: 3px 2px 5px 0px #CDCDCD;
   width: 60px;
   height: 60px;
-  display: inline-block;
+  background-color: white;
+  text-align: center;
   position: relative;
   top: 80px;
   left: 90%;
-  background-color: white;
-  text-align: center;
 }
