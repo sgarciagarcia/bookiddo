@@ -1,4 +1,6 @@
 import { useContext } from 'react';
+import {Link} from 'react-router-dom';
+
 
 import logo from '../../images/logo.svg';
 
@@ -16,7 +18,9 @@ const Header = () => {
     return (
       <>
       <div className="header-wrap">
-      <img className="logo" src={logo} alt='Bookiddo' />
+      <Link to={`/`}>
+        <img className="logo" src={logo} alt='Bookiddo' />
+      </Link>
       <div className="spacer"></div>
       <button className="third-button" type="button" onClick={handleLogOut}>Log out</button>
 

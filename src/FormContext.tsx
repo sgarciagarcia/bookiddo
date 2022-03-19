@@ -139,7 +139,6 @@ type booksProps = [{
         const provider = new GoogleAuthProvider();
         const auth = getAuth();
         await signInWithRedirect(auth, provider) as any;
-        
    };
 
    const handleLogOut = async () => {

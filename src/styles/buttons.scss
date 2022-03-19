@@ -56,3 +56,6 @@ button, .topic {
     top: -50px;
   }
   
+  @media (hover: none) {
+    *:hover { background-color: inherit; }
+  }

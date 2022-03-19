@@ -28,7 +28,6 @@ const Recommendations = () =>{
     [])
 
     if (isLoading) return <Loading /> 
-
     return (
         <div className='bg-white'>
         <h1 className='title'>Stories for {kidData.kidName}: </h1>

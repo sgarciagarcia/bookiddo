@@ -48,8 +48,8 @@ a {
   width:350px;
   height:121px;
   background-color: white;
-  -webkit-box-shadow: 3px 5px 15px 0px #CDCDCD;
-  box-shadow: 3px 5px 15px 0px #CDCDCD;
+  -webkit-box-shadow: variables.$shadow;
+  box-shadow: variables.$shadow;
   padding: 10px;
   border-radius: 10px;
   position: relative;
@@ -69,4 +69,7 @@ a {
   position: relative;
   top: 80px;
   left: 90%;
+}
+@media screen and (min-width:750px) {
+  p {font-size:1.5em;}
 }
