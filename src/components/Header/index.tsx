@@ -17,7 +17,7 @@ const Header = () => {
 
     return (
       <>
-      <div className="header-wrap">
+      <div className="header-wrapper">
       <Link to={`/`}>
         <img className="logo" src={logo} alt='Bookiddo' />
       </Link>
