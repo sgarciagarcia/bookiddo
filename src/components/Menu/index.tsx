@@ -10,13 +10,11 @@ import fav from "../../images/fav.png";
 import account from "../../images/account.png";
 
 const Menu = () => {
-  const [supportsPWA, setSupportsPWA] = useState(false);
   const [promptInstall, setPromptInstall]: any = useState(null);
 
   useEffect(() => {
     const installEventHandler = (e: any) => {
       e.preventDefault();
-      setSupportsPWA(true);
       setPromptInstall(e);
     };
     window.addEventListener("beforeinstallprompt", installEventHandler);

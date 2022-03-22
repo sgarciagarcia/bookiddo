@@ -31,7 +31,7 @@ const FavoritesList = () => {
   if (isLoading) return <Loading />;
   return (
     <div className="bg-white">
-      <h1 className="title centered">{kidData.kidName}'s favorites': </h1>
+      <h1 className="title centered">{kidData.kidName}'s favorites books: </h1>
       <div className="wrapper">
         <p>You have not marked any book as favorite yet.</p>
         {/*  <ul className="horizontal-grid">
