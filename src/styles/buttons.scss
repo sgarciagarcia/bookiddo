@@ -63,8 +63,14 @@ button, .topic {
     position: sticky;
     bottom: 63px;
     padding: 10px;
+    &.sticky {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      }
+      &.sticky span {padding:15px;}
   }
-  
+  .banner button {padding:5px;font-size:1em;}
   
   @media (hover: none) {
     *:hover { background-color: inherit; }
