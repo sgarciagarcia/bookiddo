@@ -9,7 +9,7 @@ const SearchResult = ({thisBook}:any) =>{
             <h3>{thisBook.author}</h3>
         </div>
         <div className="cover-card cover-preview" style={{ backgroundImage: `linear-gradient(180deg, rgba(16,181,212,0.7) 0%, rgba(0,183,175,0) 100%), url(${thisBook.cover})`}}>
-        { thisBook.age !== '' || typeof thisBook.age !== undefined && <span className ="bubble age"> {thisBook.age}</span> }
+        { (thisBook.age !== '' || typeof thisBook.age !== undefined) && <span className ="bubble age"> {thisBook.age}</span> }
             </div>
         </>
         )
