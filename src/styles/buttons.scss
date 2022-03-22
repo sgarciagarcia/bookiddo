@@ -77,7 +77,8 @@ button,
   bottom: 63px;
   padding: 10px;
   &.sticky {
-    position: absolute;
+    -webkit-position: sticky;
+    position: sticky;
     bottom: 0;
     width: 100%;
   }
