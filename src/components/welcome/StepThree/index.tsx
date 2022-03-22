@@ -12,13 +12,13 @@ const StepThree = () =>{
   const { kidData, setKidData, goPreviousStep, goNextStep}:any = useContext(FormContext);
   const [selectedTopics, setSelectedTopics] = useState<String[]>([]);
   const topicNames:any = [
-    'Leprechauns',
-    'Fiction',
     'Adventure and adventurers',
     'Animals',
-    'Cartoons and comics',
     'Cats',
+    'Christmas',
+    'Comics & Graphic Novels',
     'Dance',
+    'Dinosaurs',
     'Dogs',
     'Dragons',
     'Fairy tales',
@@ -35,10 +35,15 @@ const StepThree = () =>{
     'Movies',
     'Music',
     'Mystery and detective stories',
+    'Mythology',
+    'Picture books',
     'Princesses',
+    'Robots',
     'Schools',
     'Science fiction',
-    'Thriller']
+    'Teenagers',
+    'Thriller',
+    'Toy and movable books',]
         
   const handleSelectedTopics =(topic:string) => { //si el array tiene menos de 4, permite que se almacene el topic pulsado
     if (selectedTopics.length < 4) {
@@ -61,7 +66,7 @@ const StepThree = () =>{
   };
   
   return(
-    <div className="wrapper h100">
+    <div className="wrapper bg-gr">
         <h2 className="title white">What does {kidData.kidName} like?</h2>
         <p>(Choose 4)</p>
         <ul className="horizontal-grid left">
