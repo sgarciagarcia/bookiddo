@@ -7,6 +7,8 @@ import '../../../styles/spacing.scss';
 import './style.scss';
 import buy from '../../../images/buy.png';
 import fav from '../../../images/fav-fill.png';
+import Loading from '../../Loading';
+
 
 import { FormContext } from '../../../FormContext';
 
@@ -52,6 +54,8 @@ const BookCard = () =>{
     },     
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [])
+    if (isLoading) return <Loading /> 
+
     return(
         <div className="bg-shape wrapper centered">
             <div className="cover-wrapper">
