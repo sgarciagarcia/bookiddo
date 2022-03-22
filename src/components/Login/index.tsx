@@ -37,9 +37,12 @@ const Menu = () => {
             <h2 className="cursive txt-white">Read to grow up!</h2>
             <div className="divider">
             <button className="centered-button third-button" onClick={handleLogin}> Sign in with Google </button> 
-            {supportsPWA && (<button className="secondary-button" onClick={handleInstall}> Install app</button>)}
+           
             </div>
+            {supportsPWA && ( <div className="banner sticky"><span>Have you heard? You can now download our app!</span>
+            <button className="secondary-button" onClick={handleInstall}> Install app</button></div>)}     
         </div>
+        
 )
   }
   

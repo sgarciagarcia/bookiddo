@@ -30,7 +30,7 @@ const Menu = () => {
     
     return (
       <>
-       {supportsPWA && (<div className="banner"><p>Have you heard? You can now download our app!</p>
+       {supportsPWA && (<div className="banner"><span>Have you heard? You can now download our app!</span>
        <button className="secondary-button" onClick={handleInstall}> Install app</button></div>)}       
       <div className="menu-wrapper">
        
