@@ -12,8 +12,9 @@ const StepTwo = () => {
 
   const handleSubmit = (event: any) => {
     event.preventDefault(); //evita refresh
+    const name = event.target.kidName.value.charAt(0).toUpperCase() + event.target.kidName.value.slice(1)
     setKidData({
-      kidName: event.target.kidName.value,
+      kidName: name,
       kidAge: event.target.kidAge.value,
     });
     goNextStep();
