@@ -1,6 +1,5 @@
 import Header from "../components/Header";
 import Menu from "../components/Menu";
-import FavoritesList from "../components/FavoritesList";
 
 const Favorites = () => {
  
@@ -8,7 +7,7 @@ const Favorites = () => {
     return(
         <>
         <Header/>
-        <FavoritesList />   
+        <p>Lista de libros marcados como favoritos</p>   
         <Menu/> 
         </>
     )
