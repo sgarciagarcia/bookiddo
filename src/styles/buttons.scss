@@ -55,6 +55,16 @@ button, .topic {
     position: relative;
     top: -50px;
   }
+  .banner {
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+    background-color: lightyellow;
+    position: sticky;
+    bottom: 63px;
+    padding: 10px;
+  }
+  
   
   @media (hover: none) {
     *:hover { background-color: inherit; }
