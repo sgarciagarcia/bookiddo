@@ -1,31 +1,77 @@
-
 import { useParams } from 'react-router';
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
+
+import '../../../styles/fonts.scss';
+import '../../../styles/buttons.scss';
+import '../../../styles/spacing.scss';
+import './style.scss';
+import buy from '../../../images/buy.png';
+import fav from '../../../images/fav-fill.png';
 
 import { FormContext } from '../../../FormContext';
 
-const BookCard = (title:string, author:string, cover:string) =>{
-    const {booksData}:any = useContext(FormContext);
+const BookCard = () =>{
+    const {setKidData, getFromDatabase, setBooksData, booksData}:any = useContext(FormContext);
     const {isbn} = useParams();
-    const thisBook = booksData.filter((book1: {isbn :string}) => book1.isbn === isbn)
-    
+    const [isLoading, setIsLoading] = useState<boolean>(false);
+    type booksProps = {
+        isbn:number,
+        title:string,
+        author:string,
+        cover:string,
+        description:string,
+        age_group?:string,
+        amazon:string,
+        publisher:string,
+        subject:String[],
+        price:string,
+    }
+    const [thisBook, setThisBook] = useState<booksProps>({
+        isbn:0,
+        description:'',
+        age_group:'',
+        amazon:'',
+        title:'',
+        author:'',
+        cover:'',
+        publisher:'',
+        subject:[],
+        price:''
+      });
+
+    useEffect (()=>{
+        const loadBooks = async()=> {
+            setIsLoading(true)
+            const recs = await getFromDatabase()
+            setIsLoading(false)
+            // setBooksData(recs.books)
+            setThisBook(recs.books.find((book: {isbn :string}) => book.isbn === isbn))
+            // setKidData(recs) 
+        }
+        loadBooks();
+    },     
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [])
     return(
-        <div>
-        <div className="floating-info">
-            <h2 >{thisBook[0].title}</h2>
-            <h3 >{thisBook[0].author}</h3>
-        </div>
-        <div>
-            <picture>
-            <img src={thisBook[0].cover} alt= {thisBook[0].title}/>
-            </picture>
-            <span>{thisBook[0].age_group}</span>
-            <a href={`${thisBook[0].amazon}`}><button>Comprar</button></a>
-            <button>Agregar a favs</button>
-        </div>
-        <h3 >{thisBook[0].price}</h3>
-        <h4 >{thisBook[0].author} {thisBook[0].publisher}</h4>
-        <p >{thisBook[0].description}</p>
+        <div className="bg-shape wrapper centered">
+            <div className="cover-wrapper">
+                <div className="floating-info">
+                    <h1 className="title white">{thisBook.title}</h1>
+                </div>
+                <div className="cover-card cover-preview" style={{ backgroundImage: `linear-gradient(180deg, rgba(16,181,212,0.7) 0%, rgba(0,183,175,0) 100%), url(${thisBook.cover})`}}>
+                    { thisBook.age_group !== '' && <span className ="bubble age"> {thisBook.age_group}</span> }
+                </div>
+            <div className="button-wrapper">
+                <a href={`${thisBook.amazon}`} target="_blank" rel="noreferrer"><button  className=" secondary-button" ><img src={buy} alt="Buy"/></button></a>
+                <button className="secondary-button"><img src={fav} alt="Add to favorites"/></button>
+            </div>
+            { thisBook.price !== '' && thisBook.price !== '0.00' && <h3>$ {thisBook.price}</h3> }
+            </div>
+            <div className="info-card">
+                <h2>{thisBook.author}</h2>
+                <h3>Publisher: {thisBook.publisher}</h3>
+                <p >{thisBook.description}</p>
+            </div>
         </div>
         )
 }

@@ -1,4 +1,8 @@
 import {Link} from 'react-router-dom';
+import '../../styles/fonts.scss';
+import '../../styles/buttons.scss';
+import '../../styles/spacing.scss';
+import './style.scss';
 
 import home from '../../images/home.png';
 import fav from '../../images/fav.png';
@@ -7,7 +11,7 @@ import account from '../../images/account.png';
 const Menu = () => {
     
     return (
-      <div>
+      <div className="menu-wrapper">
         <ul>
             <Link to={`/`}>
                 <li><img src={home} alt='Home' /></li>

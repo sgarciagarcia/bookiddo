@@ -1,6 +1,10 @@
 import { useContext, useEffect } from "react";
 import {Link} from 'react-router-dom'
 
+import '../../../styles/fonts.scss'
+import '../../../styles/buttons.scss';
+import '../../../styles/spacing.scss';
+
 import { FormContext } from "../../../FormContext";
 import { getLocalStorage } from "../../../localStorage";
 import SearchResult from '../../search/SearchResult'
@@ -107,7 +111,6 @@ const StepFour = () =>{
               )
               const filteredSubjects = filterOpenLibRes(openLibRes)
               const definitiveISBN:any =  getDefinitiveISBN(filteredSubjects, kidData)
-              console.log(definitiveISBN)
 
             //Me está devolviendo los ISBN de los libros que quiero mostrar, ahora filtraría la response de NYTimes según esos ISBN para mostrarlo en la UI (lo guardo en setBooksData)
             const definitiveBooks =  getDefinitiveBooks ([...list1, ...list2,...list3,...list4, ...list5,...list6], definitiveISBN)
@@ -136,16 +139,17 @@ const StepFour = () =>{
 
   if(booksData.length === 0) return <ResultError/>
   return(
-    <>
-        <h1>Hooray!</h1>
+    <div className="wrapper centered h100">
+        <h1 className="title white">Hooray!</h1>
         <p>We have found the perfect book for {kidData.kidName}! </p>
         <SearchResult thisBook={booksData[0]}/>
         <Link to={`/bookCards/${booksData[0].isbn}`}>
-          <button onClick={storeBooks}>See this book</button>
+          <button className="third-button ghost" onClick={storeBooks}>See this book</button>
         </Link>
-        <button onClick={storeBooks}>Discover more books</button>
-
-</>
+        <Link to={`/`}>
+        <button className="secondary-button" onClick={storeBooks}>Discover more books</button>
+        </Link>
+</div>
         )
 }
 

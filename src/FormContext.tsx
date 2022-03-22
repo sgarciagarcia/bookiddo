@@ -1,12 +1,12 @@
 import { createContext, useEffect, useState } from 'react';
 import { getDatabase, ref, update, child, get} from "firebase/database";
-import { getAuth, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
-
+import { getAuth, signInWithRedirect, signOut, GoogleAuthProvider, getRedirectResult } from 'firebase/auth';
+import { isExpired } from 'react-jwt';
 
 
 // import reducer from './store/reducer';
 // import { FORM_ACTIONS } from './store/actions';
-import { getLocalStorage, setLocalStorage } from './localStorage';
+import { getLocalStorage, setLocalStorage, removeLocalStorage } from './localStorage';
 
 
 export const FormContext = createContext({});
@@ -15,8 +15,22 @@ const FormContextProvider = ({ children }:any) => {
     const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
     const [isRegistering, setIsRegistering] = useState<boolean>(false);
     const [isLoading, setIsLoading] = useState<boolean>(false);
-
     const [step, setStep] = useState<number>(1); //el paso inicial es el 1
+   
+    type userDataProps = {
+        token: string,
+        name: string,
+        email: string,
+        userId: string,
+        
+    }
+    const [userLocalData, setUserLocalData] = useState<userDataProps>({
+        token: '',
+        name: '',
+        email: '',
+        userId: '',
+    });
+
     type kidDataProps = {
         kidName: string,
         kidAge: number,
@@ -53,6 +67,33 @@ type booksProps = [{
     subject:[],
     price:''
   }])
+  
+  useEffect (() => {
+      const checkIsLoggedIn = async () => {
+          const auth = getAuth();
+          const result = await getRedirectResult(auth) as any;
+          if(result){
+            const dataToStore = {
+                token: result.user.accessToken, 
+                name: result.user.displayName,
+                email:result.user.email,
+                userId: result.user.uid
+            } 
+            setLocalStorage('userOuthData',dataToStore)
+            setUserLocalData(dataToStore);
+            setIsLoggedIn(true)
+          } else {
+              const userData = getLocalStorage('userOuthData');
+              if(userData) {
+                  if (!isExpired(userData.token)){
+                    setUserLocalData(userData);
+                      setIsLoggedIn(true)
+                  }
+              }
+          }
+      }
+      checkIsLoggedIn()
+  }, [])
 
     useEffect (() => { // Comprobar si el user está registrado en bbdd una vez se ha logueado
         const checkIfRegistered = async()=> {
@@ -64,7 +105,8 @@ type booksProps = [{
         setIsLoading(false)
        }        
        checkIfRegistered()
-    }, [isLoggedIn])
+    },     // eslint-disable-next-line react-hooks/exhaustive-deps
+    [isLoggedIn])
 
 
 
@@ -77,10 +119,9 @@ type booksProps = [{
 
      //Leer database
      const getFromDatabase = async() => {
-        const user = getLocalStorage('userOuthData');
         const dbRef = ref(getDatabase());
-        const dbSnapshot = await get(child(dbRef, `users/${user.userId}`))
-        if (dbSnapshot.exists()) return dbSnapshot;
+        const dbSnapshot = await get(child(dbRef, `users/${userLocalData.userId}`))
+        if (dbSnapshot.exists()) return dbSnapshot.val();
         return null
     };
 
@@ -97,18 +138,15 @@ type booksProps = [{
    const handleLogin = async () => {
         const provider = new GoogleAuthProvider();
         const auth = getAuth();
-        const result = await signInWithPopup(auth, provider) as any;
-        const dataToStore = {
-            token: result.user.accessToken, 
-            name: result.user.displayName,
-            email:result.user.email,
-            userId: result.user.uid
-        } 
-        setLocalStorage('userOuthData',dataToStore)
-        setIsLoggedIn(true)
+        await signInWithRedirect(auth, provider) as any;
    };
 
-   
+   const handleLogOut = async () => {
+    const auth = getAuth();
+    await signOut(auth);
+    removeLocalStorage('userOuthData');
+    setIsLoggedIn(false);
+  }
 
 
 
@@ -123,6 +161,7 @@ type booksProps = [{
             setKidData,
             kidData,
             handleLogin,
+            handleLogOut,
             isLoading,
             setIsLoading,
             isLoggedIn,
@@ -132,6 +171,7 @@ type booksProps = [{
             getFromDatabase,
             setBooksData,
             booksData,
+            userLocalData,
         }}>
             {children}
         </FormContext.Provider>

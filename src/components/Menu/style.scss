@@ -1,0 +1,16 @@
+@use '../../styles/variables';
+
+.menu-wrapper {
+    background-color:variables.$primary-color;
+    position:sticky;
+    bottom:0;
+    padding:15px;
+}
+.menu-wrapper ul {
+    padding:0;
+    margin:0;
+    display:flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+}
+
