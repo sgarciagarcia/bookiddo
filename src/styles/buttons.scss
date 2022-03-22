@@ -91,8 +91,9 @@ button,
   font-size: 1em;
 }
 
-@media (hover: none) {
-  *:hover {
+@media screen and (max-width:750px) {
+  button:hover {
     background-color: inherit;
+    cursor:default;
   }
 }

@@ -62,7 +62,7 @@ const BookCard = () => {
   return (
     <div className="bg-shape wrapper centered">
       <div className="cover-wrapper">
-        <div className="floating-info">
+        <div >
           <h1 className="title white">{thisBook.title}</h1>
         </div>
         <div
