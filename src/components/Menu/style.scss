@@ -1,9 +1,12 @@
 @use '../../styles/variables';
 
-.menu-wrapper {
-    background-color:variables.$primary-color;
+.menu {
     position:sticky;
     bottom:0;
+    z-index:100;}
+
+.menu-wrapper {
+    background-color:variables.$primary-color;
     padding:15px;
 }
 .menu-wrapper ul {

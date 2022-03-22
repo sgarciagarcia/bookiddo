@@ -23,7 +23,7 @@ const StepTwo = () =>{
       };
 
     return(
-      <div className="h100 wrapper">
+      <div className="h100 wrapper bg-gr">
             <form onSubmit={handleSubmit}>
             <h2 className="title white">What is your kid's name?</h2>
 

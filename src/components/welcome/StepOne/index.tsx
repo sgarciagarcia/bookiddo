@@ -9,7 +9,7 @@ const StepOne = () =>{
 
     const {goNextStep}:any = useContext(FormContext);
     return(
-        <div className="h100 wrapper">
+        <div className="h100 wrapper bg-gr">
             <div>
             <h2 className="title white">Welcome!</h2>
             <p className="intro">You and your kid are about to experience the greatest adventure of all: reading!</p>

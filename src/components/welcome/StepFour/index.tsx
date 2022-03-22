@@ -10,8 +10,46 @@ import { getLocalStorage } from "../../../localStorage";
 import SearchResult from '../../search/SearchResult'
 import ResultError from '../../search/ResultError'
 
+export type BooksResponseType = {
+  [key: string]: string;
+};
+export type ISBNResponseType = {
+  [key: string]: string[];
+};
+
+type DefinitivesISBNs = Array<{
+  isbn: string;
+}>;
+
+type kidDataProps = {
+  kidName: string,
+  kidAge: number,
+  selectedTopics: String[]
+}
+
+export const getDefinitiveBooks = (
+  response: BooksResponseType[],
+  definitiveISBN: DefinitivesISBNs
+) => {
+  return response.filter((book1: BooksResponseType) =>
+    definitiveISBN.some((book2: BooksResponseType) => book1.isbn === book2.isbn)
+  );
+};
+
+export const getDefinitiveISBN = ( filteredSubjects:ISBNResponseType[], kidData:kidDataProps ) => {
+  return filteredSubjects.reduce( (filtered:BooksResponseType[], book:any) => { //Compara los topics de OpenLibrary con los de kidData y filtra y se queda sólo con el isbn de los que nos valen.
+    const checkIfAny = (array_checking: any) => kidData.selectedTopics.some((i: any) => array_checking.includes(i)) 
+    if (checkIfAny(book.topics) && book.isbn) {
+      const validBook = {isbn: book.isbn[0]}
+      filtered.push(validBook);
+      } 
+      return filtered
+    }, [])
+}
+
 
 const StepFour = () =>{
+  
   const {kidData, booksData, setBooksData, storeInDatabase, setIsRegistering, setIsLoading}:any = useContext(FormContext);
 
   const fetchOneList = async (namelist:string) => {
@@ -46,7 +84,7 @@ const StepFour = () =>{
     if (isbnData?.subjects && isbnData?.identifiers.isbn_13) {
       const topics = isbnData.subjects.map((book:any) => (book.name));
       const id = isbnData.identifiers.isbn_13
-      return {topics: topics, isbn:id}//Estoy suponiendo que todos los libros tienen isbn 13 (algunos tienen isbn 10 pero otros no)
+      return {topics: topics, isbn:id}
     }
     return null
     
@@ -55,22 +93,9 @@ const StepFour = () =>{
   }
   
   const filterOpenLibRes = (openLibRes: any) =>  openLibRes.filter(Boolean)
-  
-  const getDefinitiveISBN = ( filteredSubjects:any, kidData:any ) => {
-    return filteredSubjects.reduce( (filtered:any, book:any) => { //Compara los topics de OpenLibrary con los de kidData y filtra  y se queda sólo con el isbn de los que nos valen.
-    const checkIfAny = (array_checking: any) => kidData.selectedTopics.some((i: String[]) => array_checking.includes(i)) 
-    if (checkIfAny(book.topics) && book.isbn) {
-      const validBook = {isbn: book.isbn[0]}
-       filtered.push(validBook);
-      } 
-      return filtered
-    }, [])
-}
-  const getDefinitiveBooks = (response: any, definitiveISBN: any) => {
-    return response.filter((book1: { isbn: any; }) => definitiveISBN.some((book2: { isbn: any; }) => book1.isbn === book2.isbn));
-  }
-  useEffect(() => {
+ 
 
+  useEffect(() => {
   const CALL_APIS = async (kidData:any) => {
         try {
           setIsLoading(true)
@@ -137,11 +162,11 @@ const StepFour = () =>{
     }, userData.userId) 
   } 
 
-  if(booksData.length === 0) return <ResultError/>
+  if (booksData.length === 0) return <ResultError/>
   return(
-    <div className="wrapper centered h100">
+    <div className="wrapper centered h100 bg-login">
         <h1 className="title white">Hooray!</h1>
-        <p>We have found the perfect book for {kidData.kidName}! </p>
+        <h2>We have found the perfect book for {kidData.kidName}! </h2>
         <SearchResult thisBook={booksData[0]}/>
         <Link to={`/bookCards/${booksData[0].isbn}`}>
           <button className="third-button ghost" onClick={storeBooks}>See this book</button>
@@ -151,6 +176,7 @@ const StepFour = () =>{
         </Link>
 </div>
         )
+
 }
 
-export default StepFour;
+export  default StepFour;

@@ -29,7 +29,7 @@ const Menu = () => {
   };
     
     return (
-      <>
+      <div className="menu">
        <div className="banner"><span>Have you heard? You can now download our app!</span>
        <button className="secondary-button" onClick={handleInstall}> Install app</button></div>      
       <div className="menu-wrapper">
@@ -47,7 +47,7 @@ const Menu = () => {
         </ul>
       
       </div>
-      </>
+      </div>
     )
   }
   
