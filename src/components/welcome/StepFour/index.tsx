@@ -1,14 +1,14 @@
 import { useContext, useEffect } from "react";
-import {Link} from 'react-router-dom'
+import { Link } from "react-router-dom";
 
-import '../../../styles/fonts.scss'
-import '../../../styles/buttons.scss';
-import '../../../styles/spacing.scss';
+import "../../../styles/fonts.scss";
+import "../../../styles/buttons.scss";
+import "../../../styles/spacing.scss";
 
 import { FormContext } from "../../../FormContext";
 import { getLocalStorage } from "../../../localStorage";
-import SearchResult from '../../search/SearchResult'
-import ResultError from '../../search/ResultError'
+import SearchResult from "../../search/SearchResult";
+import ResultError from "../../search/ResultError";
 
 export type BooksResponseType = {
   [key: string]: string;
@@ -22,10 +22,10 @@ type DefinitivesISBNs = Array<{
 }>;
 
 type kidDataProps = {
-  kidName: string,
-  kidAge: number,
-  selectedTopics: String[]
-}
+  kidName: string;
+  kidAge: number;
+  selectedTopics: String[];
+};
 
 export const getDefinitiveBooks = (
   response: BooksResponseType[],
@@ -36,147 +36,210 @@ export const getDefinitiveBooks = (
   );
 };
 
-export const getDefinitiveISBN = ( filteredSubjects:ISBNResponseType[], kidData:kidDataProps ) => {
-  return filteredSubjects.reduce( (filtered:BooksResponseType[], book:any) => { //Compara los topics de OpenLibrary con los de kidData y filtra y se queda sólo con el isbn de los que nos valen.
-    const checkIfAny = (array_checking: any) => kidData.selectedTopics.some((i: any) => array_checking.includes(i)) 
+export const getDefinitiveISBN = (
+  filteredSubjects: ISBNResponseType[],
+  kidData: kidDataProps
+) => {
+  return filteredSubjects.reduce((filtered: BooksResponseType[], book: any) => {
+    //Compara los topics de OpenLibrary con los de kidData y filtra y se queda sólo con el isbn de los que nos valen.
+    const checkIfAny = (array_checking: any) =>
+      kidData.selectedTopics.some((i: any) => array_checking.includes(i));
     if (checkIfAny(book.topics) && book.isbn) {
-      const validBook = {isbn: book.isbn[0]}
+      const validBook = { isbn: book.isbn[0] };
       filtered.push(validBook);
-      } 
-      return filtered
-    }, [])
-}
+    }
+    return filtered;
+  }, []);
+};
 
+const StepFour = () => {
+  const {
+    kidData,
+    booksData,
+    setBooksData,
+    storeInDatabase,
+    setIsRegistering,
+    setIsLoading,
+  }: any = useContext(FormContext);
 
-const StepFour = () =>{
-  
-  const {kidData, booksData, setBooksData, storeInDatabase, setIsRegistering, setIsLoading}:any = useContext(FormContext);
-
-  const fetchOneList = async (namelist:string) => {
+  const fetchOneList = async (namelist: string) => {
     const response = await fetch(
       `https://api.nytimes.com/svc/books/v3/lists/current/${namelist}.json?api-key=GiR57J7LMkPxxzuAgWnQ2sH7gSnZ6gpK`
     );
     const data = await response.json();
-    return data.results.books.map(({
-      primary_isbn13, title, author, book_image, description,age_group, amazon_product_url, publisher, published_date, price
-    }:any) => { 
-     return {
-      isbn: primary_isbn13,
-      title: title ?? '',
-      author: author ?? 'Author not found',
-      cover:book_image ?? 'url default', //tener cover by default
-      description:description ?? '',
-      age_group: age_group ?? '',
-      amazon:amazon_product_url ?? '',
-      publisher:publisher ?? 'Publisher not found',
-      year:published_date ?? '',
-      price: price ?? 'Price not found',
-    }} )
-  }
-
-  const fetchSubjects = async (isbn:number) => { //llamar api xa obtener subjects de cada isbn
-   try {
-     const response = await fetch(
-      `https://openlibrary.org/api/books?bibkeys=ISBN:${isbn}&format=json&jscmd=data`
+    return data.results.books.map(
+      ({
+        primary_isbn13,
+        title,
+        author,
+        book_image,
+        description,
+        age_group,
+        amazon_product_url,
+        publisher,
+        published_date,
+        price,
+      }: any) => {
+        return {
+          isbn: primary_isbn13,
+          title: title ?? "",
+          author: author ?? "Author not found",
+          cover: book_image ?? "url default", //tener cover by default
+          description: description ?? "",
+          age_group: age_group ?? "",
+          amazon: amazon_product_url ?? "",
+          publisher: publisher ?? "Publisher not found",
+          year: published_date ?? "",
+          price: price ?? "Price not found",
+        };
+      }
     );
-    const data = await response.json();
-    const isbnData = data[`ISBN:${isbn}`]
-    if (isbnData?.subjects && isbnData?.identifiers.isbn_13) {
-      const topics = isbnData.subjects.map((book:any) => (book.name));
-      const id = isbnData.identifiers.isbn_13
-      return {topics: topics, isbn:id}
+  };
+
+  const fetchSubjects = async (isbn: number) => {
+    //llamar api xa obtener subjects de cada isbn
+    try {
+      const response = await fetch(
+        `https://openlibrary.org/api/books?bibkeys=ISBN:${isbn}&format=json&jscmd=data`
+      );
+      const data = await response.json();
+      const isbnData = data[`ISBN:${isbn}`];
+      if (isbnData?.subjects && isbnData?.identifiers.isbn_13) {
+        const topics = isbnData.subjects.map((book: any) => book.name);
+        const id = isbnData.identifiers.isbn_13;
+        return { topics: topics, isbn: id };
+      }
+      return null;
+    } catch (e) {
+      console.error(e);
     }
-    return null
-    
-   }
-   catch (e) {console.error(e);}
-  }
-  
-  const filterOpenLibRes = (openLibRes: any) =>  openLibRes.filter(Boolean)
- 
+  };
 
-  useEffect(() => {
-  const CALL_APIS = async (kidData:any) => {
+  const filterOpenLibRes = (openLibRes: any) => openLibRes.filter(Boolean);
+
+  useEffect(
+    () => {
+      const CALL_APIS = async (kidData: any) => {
         try {
-          setIsLoading(true)
-          if (kidData.kidAge < 8) { //Pequeños
-            const response = await fetchOneList('picture-books') //llamo a lista NYT
-            const openLibRes = await Promise.all( //Llamo a OpenLib con el isbn y consigo subjects
-              response.map((book:any) => fetchSubjects(book.isbn)) //Hace 1 llamada por cada libro de la lista NYT
-            )
-            const filteredSubjects = filterOpenLibRes(openLibRes)
-            const definitiveISBN:any =  getDefinitiveISBN(filteredSubjects, kidData)
+          setIsLoading(true);
+          if (kidData.kidAge < 8) {
+            //Pequeños
+            const response = await fetchOneList("picture-books"); //llamo a lista NYT
+            const openLibRes = await Promise.all(
+              //Llamo a OpenLib con el isbn y consigo subjects
+              response.map((book: any) => fetchSubjects(book.isbn)) //Hace 1 llamada por cada libro de la lista NYT
+            );
+            const filteredSubjects = filterOpenLibRes(openLibRes);
+            const definitiveISBN: any = getDefinitiveISBN(
+              filteredSubjects,
+              kidData
+            );
 
             //Me está devolviendo los ISBN de los libros que quiero mostrar, ahora filtraría la response de NYTimes según esos ISBN para mostrarlo en la UI (lo guardo en setBooksData)
-            const definitiveBooks = getDefinitiveBooks (response, definitiveISBN)
-            setBooksData(definitiveBooks)
-
-            
+            const definitiveBooks = getDefinitiveBooks(
+              response,
+              definitiveISBN
+            );
+            setBooksData(definitiveBooks);
           }
 
-          if (kidData.kidAge >=8 && kidData.kidAge < 12) { //Middle grade
-             const [list1, list2, list3, list4] = await Promise.all(
-               [fetchOneList('childrens-middle-grade'), fetchOneList('childrens-middle-grade-e-book'), fetchOneList('childrens-middle-grade-hardcover'), fetchOneList('childrens-middle-grade-paperback')])
-              const openLibRes = await Promise.all(
-                [...list1, ...list2,...list3,...list4].map((book) => fetchSubjects(book.isbn))
+          if (kidData.kidAge >= 8 && kidData.kidAge < 12) {
+            //Middle grade
+            const [list1, list2, list3, list4] = await Promise.all([
+              fetchOneList("childrens-middle-grade"),
+              fetchOneList("childrens-middle-grade-e-book"),
+              fetchOneList("childrens-middle-grade-hardcover"),
+              fetchOneList("childrens-middle-grade-paperback"),
+            ]);
+            const openLibRes = await Promise.all(
+              [...list1, ...list2, ...list3, ...list4].map((book) =>
+                fetchSubjects(book.isbn)
               )
-              const filteredSubjects = filterOpenLibRes(openLibRes)
-              const definitiveISBN:any =  getDefinitiveISBN(filteredSubjects, kidData)
+            );
+            const filteredSubjects = filterOpenLibRes(openLibRes);
+            const definitiveISBN: any = getDefinitiveISBN(
+              filteredSubjects,
+              kidData
+            );
 
             //Me está devolviendo los ISBN de los libros que quiero mostrar, ahora filtraría la response de NYTimes según esos ISBN para mostrarlo en la UI (lo guardo en setBooksData)
-            const definitiveBooks =  getDefinitiveBooks ([...list1, ...list2,...list3,...list4], definitiveISBN)
-            setBooksData(definitiveBooks)
+            const definitiveBooks = getDefinitiveBooks(
+              [...list1, ...list2, ...list3, ...list4],
+              definitiveISBN
+            );
+            setBooksData(definitiveBooks);
           }
 
-          if (kidData.kidAge >= 12) { //Young adult
-            const [list1, list2, list3, list4, list5, list6] = await Promise.all(
-              [fetchOneList('paperback-books'), fetchOneList('series-books'), fetchOneList('young-adult'), fetchOneList('young-adult-e-book'), fetchOneList('young-adult-hardcover'), fetchOneList('young-adult-paperback')])
-              const openLibRes = await Promise.all(
-                [...list1, ...list2,...list3,...list4, ...list5,...list6].map((book) => fetchSubjects(book.isbn))
+          if (kidData.kidAge >= 12) {
+            //Young adult
+            const [list1, list2, list3, list4, list5, list6] =
+              await Promise.all([
+                fetchOneList("paperback-books"),
+                fetchOneList("series-books"),
+                fetchOneList("young-adult"),
+                fetchOneList("young-adult-e-book"),
+                fetchOneList("young-adult-hardcover"),
+                fetchOneList("young-adult-paperback"),
+              ]);
+            const openLibRes = await Promise.all(
+              [...list1, ...list2, ...list3, ...list4, ...list5, ...list6].map(
+                (book) => fetchSubjects(book.isbn)
               )
-              const filteredSubjects = filterOpenLibRes(openLibRes)
-              const definitiveISBN:any =  getDefinitiveISBN(filteredSubjects, kidData)
+            );
+            const filteredSubjects = filterOpenLibRes(openLibRes);
+            const definitiveISBN: any = getDefinitiveISBN(
+              filteredSubjects,
+              kidData
+            );
 
             //Me está devolviendo los ISBN de los libros que quiero mostrar, ahora filtraría la response de NYTimes según esos ISBN para mostrarlo en la UI (lo guardo en setBooksData)
-            const definitiveBooks =  getDefinitiveBooks ([...list1, ...list2,...list3,...list4, ...list5,...list6], definitiveISBN)
-            setBooksData(definitiveBooks)
-         }
-
+            const definitiveBooks = getDefinitiveBooks(
+              [...list1, ...list2, ...list3, ...list4, ...list5, ...list6],
+              definitiveISBN
+            );
+            setBooksData(definitiveBooks);
+          }
         } catch (e) {
           console.error(e);
         }
-  };
-  CALL_APIS(kidData);
-  setIsLoading(false)
-
-  }, // eslint-disable-next-line react-hooks/exhaustive-deps
-  []);
+      };
+      CALL_APIS(kidData);
+      setIsLoading(false);
+    }, // eslint-disable-next-line react-hooks/exhaustive-deps
+    []
+  );
 
   const storeBooks = () => {
-    setIsRegistering(false)
-    const userData = getLocalStorage('userOuthData') 
-    storeInDatabase({
-      ...userData,
-      ...kidData,
-      books: booksData,
-    }, userData.userId) 
-  } 
+    setIsRegistering(false);
+    const userData = getLocalStorage("userOuthData");
+    storeInDatabase(
+      {
+        ...userData,
+        ...kidData,
+        books: booksData,
+      },
+      userData.userId
+    );
+  };
 
-  if (booksData.length === 0) return <ResultError/>
-  return(
+  if (booksData.length === 0) return <ResultError />;
+  return (
     <div className="wrapper centered h100 bg-login">
-        <h1 className="title white">Hooray!</h1>
-        <h2>We have found the perfect book for {kidData.kidName}! </h2>
-        <SearchResult thisBook={booksData[0]}/>
-        <Link to={`/bookCards/${booksData[0].isbn}`}>
-          <button className="third-button ghost" onClick={storeBooks}>See this book</button>
-        </Link>
-        <Link to={`/`}>
-        <button className="secondary-button" onClick={storeBooks}>Discover more books</button>
-        </Link>
-</div>
-        )
+      <h1 className="title white">Hooray!</h1>
+      <h2>We have found the perfect book for {kidData.kidName}! </h2>
+      <SearchResult thisBook={booksData[0]} />
+      <Link to={`/bookCards/${booksData[0].isbn}`}>
+        <button className="third-button ghost" onClick={storeBooks}>
+          See this book
+        </button>
+      </Link>
+      <Link to={`/`}>
+        <button className="secondary-button" onClick={storeBooks}>
+          Discover more books
+        </button>
+      </Link>
+    </div>
+  );
+};
 
-}
-
-export  default StepFour;
+export default StepFour;

@@ -1,17 +1,25 @@
-import '../../../styles/buttons.scss';
+import "../../../styles/buttons.scss";
 
-const TopicButton = ({topic, handleSelectedTopics, unselectTopics, isChecked}:any) => {
-  const handleClick =() => {
+const TopicButton = ({
+  topic,
+  handleSelectedTopics,
+  unselectTopics,
+  isChecked,
+}: any) => {
+  const handleClick = () => {
     handleSelectedTopics(topic);
-    
   };
   const handleUnclick = () => {
-    unselectTopics(topic)
-  }
+    unselectTopics(topic);
+  };
   return (
-    
-    <li className={ `topic ${isChecked ? 'secondary-button': 'white-button'} `} onClick={ isChecked ? handleUnclick : handleClick}>{topic}</li>
-  )
-}
+    <li
+      className={`topic ${isChecked ? "secondary-button" : "white-button"} `}
+      onClick={isChecked ? handleUnclick : handleClick}
+    >
+      {topic}
+    </li>
+  );
+};
 
-export default TopicButton
+export default TopicButton;

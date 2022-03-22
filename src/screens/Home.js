@@ -1,18 +1,14 @@
-
-import Recommendations from '../components/Recommendations';
-import Header from '../components/Header';
-import Menu from '../components/Menu';
-
+import Recommendations from "../components/Recommendations";
+import Header from "../components/Header";
+import Menu from "../components/Menu";
 
 const Home = () => {
-
-    return (
+  return (
     <>
-    <Header/>
-    <Recommendations/>
-    <Menu/>
+      <Header />
+      <Recommendations />
+      <Menu />
     </>
-    
-    )
-}
-export default Home
+  );
+};
+export default Home;

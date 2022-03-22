@@ -1,11 +1,11 @@
-import { initializeApp } from 'firebase/app';
+import { initializeApp } from "firebase/app";
 import { getDatabase } from "firebase/database";
-
 
 const firebaseConfig = {
   apiKey: "AIzaSyBdSLU0ozEPDecW4NBhTtEScGmCntECyP0",
   authDomain: "bookiddo-1e2dc.firebaseapp.com",
-  databaseURL: "https://bookiddo-1e2dc-default-rtdb.europe-west1.firebasedatabase.app",
+  databaseURL:
+    "https://bookiddo-1e2dc-default-rtdb.europe-west1.firebasedatabase.app",
   projectId: "bookiddo-1e2dc",
   storageBucket: "bookiddo-1e2dc.appspot.com",
   messagingSenderId: "696715108783",

@@ -1,52 +1,63 @@
-@use './variables';
+@use "./variables";
 
 /*Generals and position*/
 /*Mixins*/
 @mixin wrap-center {
-	display:flex;
-  flex-direction:column;
-	justify-content: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
 }
 
-.h100{
-  height:100vh;
+.h100 {
+  height: 100vh;
 }
 .wrapper {
-  padding:75px 20px;
-  &.centered{@include wrap-center};  
+  padding: 75px 20px;
+  &.centered {
+    @include wrap-center;
+  }
 }
-label {display:none;};
+label {
+  display: none;
+}
 .divider {
-  display:flex;
-  flex:0.2;
+  display: flex;
+  flex: 0.2;
 }
-.spacer {flex:1}
+.spacer {
+  flex: 1;
+}
 
 .bg-white {
-  padding:10px;
+  padding: 10px;
   background-color: variables.$white;
-  min-height:100vh;
+  min-height: 100vh;
 }
-.hidden {opacity:0;}
+.hidden {
+  opacity: 0;
+}
 
 .horizontal-grid {
-  min-width:70%;
+  min-width: 70%;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
-  &.left{justify-content: left;};  
-
+  &.left {
+    justify-content: left;
+  }
 }
 
 .horizontal-grid li {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  margin:15px;
+  margin: 15px;
 }
 
-@media screen and (max-width:400px) {
-  .horizontal-grid {flex-direction:column;}
+@media screen and (max-width: 400px) {
+  .horizontal-grid {
+    flex-direction: column;
+  }
 }

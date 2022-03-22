@@ -1,5 +1,10 @@
-@use '../../styles/variables';
+@use "../../styles/variables";
 
-h2, h3, p {color:variables.$black;}
-.txt-black{color:variables.$black;}
-
+h2,
+h3,
+p {
+  color: variables.$black;
+}
+.txt-black {
+  color: variables.$black;
+}

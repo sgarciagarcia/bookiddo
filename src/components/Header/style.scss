@@ -1,27 +1,31 @@
-@use '../../styles/variables';
+@use "../../styles/variables";
 
-img.logo {width: 40px}
-.header-wrapper{
-    position:relative;
-    padding:12px;
-    background: variables.$green-gr;
-    height:50px;
-    display:flex;
-    &.bg-blue {background: variables.$primary-color;
-    }
+img.logo {
+  width: 40px;
+}
+.header-wrapper {
+  position: relative;
+  padding: 12px;
+  background: variables.$green-gr;
+  height: 50px;
+  display: flex;
+  &.bg-blue {
+    background: variables.$primary-color;
+  }
 }
 .waves {
-    position: absolute;
-    top: 50;
-    left: 0;
-    width: 100%;
-    overflow: hidden;
-    line-height: 0;
-    fill: #00B7AF;
+  position: absolute;
+  top: 50;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+  fill: #00b7af;
 }
 
 .waves svg {
-    position: relative;
-    display: block;
-    width: calc(116% + 1.3px);
-    height: 100px;}
+  position: relative;
+  display: block;
+  width: calc(116% + 1.3px);
+  height: 100px;
+}

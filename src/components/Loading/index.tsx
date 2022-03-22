@@ -1,13 +1,12 @@
-import loader from '../../images/loader.gif'
+import loader from "../../images/loader.gif";
 
 const Loading = () => {
-    
-    return (
-      <>
+  return (
+    <>
       <p>loading....</p>
-      <img src={loader} alt='Loading content...'/>
-      </>
-    )
-  }
-  
-  export default Loading
+      <img src={loader} alt="Loading content..." />
+    </>
+  );
+};
+
+export default Loading;
