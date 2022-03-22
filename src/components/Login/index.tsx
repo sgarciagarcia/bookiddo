@@ -27,6 +27,7 @@ const Menu = () => {
   };
 
   return (
+    <>
     <div className="h100 bg-login wrapper centered">
       <picture>
         <img src={logo} alt="Bookiddo logo" />
@@ -39,14 +40,15 @@ const Menu = () => {
           Sign in with Google{" "}
         </button>
       </div>
-      <div className="banner sticky">
+    </div>
+    <div className="banner sticky">
         <span>Have you heard? You can now download our app!</span>
         <button className="secondary-button" onClick={handleInstall}>
           {" "}
           Install app
         </button>
       </div>
-    </div>
+    </>
   );
 };
 
