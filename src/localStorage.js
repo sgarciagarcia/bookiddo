@@ -1,4 +1,3 @@
-import { signOut } from "@firebase/auth";
 
 export const getLocalStorage = (key) => JSON.parse(window.localStorage.getItem(key));
 export const setLocalStorage = (key, localStorage) =>

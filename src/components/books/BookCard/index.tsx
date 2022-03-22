@@ -11,9 +11,9 @@ import fav from '../../../images/fav-fill.png';
 import { FormContext } from '../../../FormContext';
 
 const BookCard = () =>{
-    const {setKidData, getFromDatabase, setBooksData, booksData}:any = useContext(FormContext);
+    const { getFromDatabase}:any = useContext(FormContext);
     const {isbn} = useParams();
-    const [isLoading, setIsLoading] = useState<boolean>(false);
+    const [ setIsLoading] = useState<boolean>(false);
     type booksProps = {
         isbn:number,
         title:string,
