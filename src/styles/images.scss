@@ -1,17 +1,17 @@
-@use './variables';
+@use "./variables";
 /*Images*/
 .cover-preview {
-    width: 300px;
-    height: 300px;
-    background-size: cover;
-    background-position: center;
-    border-radius:10px;
-  }
+  width: 300px;
+  height: 300px;
+  background-size: cover;
+  background-position: center;
+  border-radius: 10px;
+}
 
-  .cover-card {
-    width: 400px;
-    height: 600px;
-  }
-  .bg-gr {background:variables.$green-gr}
-
- 
+.cover-card {
+  width: 400px;
+  height: 600px;
+}
+.bg-gr {
+  background: variables.$green-gr;
+}

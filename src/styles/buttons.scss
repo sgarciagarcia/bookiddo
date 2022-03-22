@@ -1,77 +1,97 @@
-@use './variables';
-@use './spacing';
+@use "./variables";
+@use "./spacing";
 
 @mixin centered {
-    align-self: center}
+  align-self: center;
+}
 /*Buttons*/
-button, .topic {
-    border:none;
-    border-radius:5px;
-    color:white;
-    padding:10px;
-    margin-top:10px;
-    &:hover {
-      cursor:pointer;
-    }
+button,
+.topic {
+  border: none;
+  border-radius: 5px;
+  color: white;
+  padding: 10px;
+  margin-top: 10px;
+  &:hover {
+    cursor: pointer;
   }
-  .topic {margin:10px;}
-  .primary-button {
-    background-color:variables.$primary-color;
-    &.ghost {
-      border: 2px solid variables.$primary-color;
-      color:variables.$primary-color;
-      background-color:transparent;
-    }
-    &:hover {background-color:variables.$primary-color-hover;}
+}
+.topic {
+  margin: 10px;
+}
+.primary-button {
+  background-color: variables.$primary-color;
+  &.ghost {
+    border: 2px solid variables.$primary-color;
+    color: variables.$primary-color;
+    background-color: transparent;
   }
-  .secondary-button {
-    background-color:variables.$secondary-color;
-    display: flex;
-    justify-content: center;
-    margin:10px;
-    &.ghost {
-      border: 2px solid variables.$secondary-color;
-      color:variables.$secondary-color;
-      background-color:transparent;
-    }
-    &:hover {background-color:variables.$secondary-color-hover;}
+  &:hover {
+    background-color: variables.$primary-color-hover;
   }
-  .third-button { 
-    background-color:variables.$yellow; 
-    color:variables.$dark-yellow;
-    &.ghost {
-      border: 2px solid variables.$yellow;
-      background-color:transparent;
-      color:variables.$yellow;
-    }
-    &:hover {background-color:variables.$yellow-hover;}
+}
+.secondary-button {
+  background-color: variables.$secondary-color;
+  display: flex;
+  justify-content: center;
+  margin: 10px;
+  &.ghost {
+    border: 2px solid variables.$secondary-color;
+    color: variables.$secondary-color;
+    background-color: transparent;
   }
-  .white-button {background-color:variables.$white; 
-    color:variables.$black;
+  &:hover {
+    background-color: variables.$secondary-color-hover;
   }
-  .centered-button {@include centered}
-  .button-wrapper {
-    display:flex;
-    position: relative;
-    top: -50px;
+}
+.third-button {
+  background-color: variables.$yellow;
+  color: variables.$dark-yellow;
+  &.ghost {
+    border: 2px solid variables.$yellow;
+    background-color: transparent;
+    color: variables.$yellow;
   }
-  .banner {
-    display: flex;
-    justify-content: center;
-    align-items: baseline;
-    background-color: lightyellow;
-    position: sticky;
-    bottom: 63px;
-    padding: 10px;
-    &.sticky {
-      position: absolute;
-      bottom: 0;
-      width: 100%;
-      }
-      &.sticky span {padding:15px;}
+  &:hover {
+    background-color: variables.$yellow-hover;
   }
-  .banner button {padding:5px;font-size:1em;}
-  
-  @media (hover: none) {
-    *:hover { background-color: inherit; }
+}
+.white-button {
+  background-color: variables.$white;
+  color: variables.$black;
+}
+.centered-button {
+  @include centered;
+}
+.button-wrapper {
+  display: flex;
+  position: relative;
+  top: -50px;
+}
+.banner {
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  background-color: lightyellow;
+  position: sticky;
+  bottom: 63px;
+  padding: 10px;
+  &.sticky {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
   }
+  &.sticky span {
+    padding: 15px;
+  }
+}
+.banner button {
+  padding: 5px;
+  font-size: 1em;
+}
+
+@media (hover: none) {
+  *:hover {
+    background-color: inherit;
+  }
+}

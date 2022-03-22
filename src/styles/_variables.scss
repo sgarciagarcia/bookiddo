@@ -1,20 +1,32 @@
 /*Colors*/
 $white: #ffffff;
 $black: #393939;
-$primary-color: #0BB5C9;
+$primary-color: #0bb5c9;
 $primary-color-hover: #0d96a5;
-$secondary-color: #EA1F9E;
+$secondary-color: #ea1f9e;
 $secondary-color-hover: #ac0b71;
-$yellow: #F6E57F;
+$yellow: #f6e57f;
 $yellow-hover: #d6b916;
-$dark-yellow: #8B7A14;
+$dark-yellow: #8b7a14;
 
 /*Gradients*/
-$green-gr: linear-gradient(180deg, rgba(16,181,212,1) 0%, rgba(0,183,175,1) 100%); 
-$pink-gr:  linear-gradient(180deg, rgba(234,31,158,1) 0%, rgba(245,174,219,1) 100%); 
-$pink-yellow-gr:  linear-gradient(180deg, rgba(234,31,158,1) 0%, rgba(238,214,176,1) 100%); 
+$green-gr: linear-gradient(
+  180deg,
+  rgba(16, 181, 212, 1) 0%,
+  rgba(0, 183, 175, 1) 100%
+);
+$pink-gr: linear-gradient(
+  180deg,
+  rgba(234, 31, 158, 1) 0%,
+  rgba(245, 174, 219, 1) 100%
+);
+$pink-yellow-gr: linear-gradient(
+  180deg,
+  rgba(234, 31, 158, 1) 0%,
+  rgba(238, 214, 176, 1) 100%
+);
 
 /*Fonts*/
-$signika: 'Signika', Arial, sans-serif;
+$signika: "Signika", Arial, sans-serif;
 
-$shadow: 3px 5px 15px 0px #CDCDCD;
+$shadow: 3px 5px 15px 0px #cdcdcd;
