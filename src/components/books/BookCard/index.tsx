@@ -13,7 +13,7 @@ import { FormContext } from '../../../FormContext';
 const BookCard = () =>{
     const { getFromDatabase}:any = useContext(FormContext);
     const {isbn} = useParams();
-    const [ setIsLoading] = useState<boolean>(false);
+    const [ isLoading, setIsLoading] = useState<boolean>(false);
     type booksProps = {
         isbn:number,
         title:string,
