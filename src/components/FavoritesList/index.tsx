@@ -6,11 +6,10 @@ import '../../styles/spacing.scss';
 
 
 import { FormContext } from '../../FormContext';
-import BookPreview from '../books/BookPreview';
 import Loading from '../Loading';
 
 const FavoritesList = () =>{
-    const {setKidData, kidData, getFromDatabase, setBooksData, booksData}:any = useContext(FormContext);
+    const {setKidData, kidData, getFromDatabase, setBooksData}:any = useContext(FormContext);
     const [isLoading, setIsLoading] = useState<boolean>(false);
 
     useEffect (()=>{
