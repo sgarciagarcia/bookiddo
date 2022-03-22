@@ -8,7 +8,7 @@ const ResultError = () => {
   const { kidData, goPreviousStep }: any = useContext(FormContext);
 
   return (
-    <>
+    <div className="h100 bg-login wrapper centered">
       <h1>Ooops!</h1>
       <p>
         We currently do not have books in our library that matches the following
@@ -20,9 +20,9 @@ const ResultError = () => {
         })}
       </ul>
       <Link to={`/`}>
-        <button onClick={goPreviousStep}>Choose different topics</button>
+        <button className="secondary-button" onClick={goPreviousStep}>Choose different topics</button>
       </Link>
-    </>
+    </div>
   );
 };
 
