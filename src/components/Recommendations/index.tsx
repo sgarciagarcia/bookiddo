@@ -30,7 +30,7 @@ const Recommendations = () =>{
     if (isLoading) return <Loading /> 
     return (
         <div className='bg-white'>
-        <h1 className='title'>Stories for {kidData.kidName}: </h1>
+        <h1 className='title centered'>Stories for {kidData.kidName}: </h1>
         <div className="wrapper">
         <ul className="horizontal-grid">
             {booksData && booksData.map (({
