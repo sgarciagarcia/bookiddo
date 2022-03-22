@@ -9,14 +9,12 @@ import logo from "../../images/loader.gif";
 import { FormContext } from "../../FormContext";
 
 const Menu = () => {
-  const [supportsPWA, setSupportsPWA] = useState(false);
   const [promptInstall, setPromptInstall]: any = useState(null);
   const { handleLogin }: any = useContext(FormContext);
 
   useEffect(() => {
     const installEventHandler = (e: any) => {
       e.preventDefault();
-      setSupportsPWA(true);
       setPromptInstall(e);
     };
     window.addEventListener("beforeinstallprompt", installEventHandler);
