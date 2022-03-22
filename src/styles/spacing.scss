@@ -13,7 +13,7 @@
   height:100vh;
 }
 .wrapper {
-  padding:20px;
+  padding:75px 20px;
   &.centered{@include wrap-center};  
 }
 label {display:none;};
@@ -45,4 +45,8 @@ label {display:none;};
   flex-direction: column;
   justify-content: flex-start;
   margin:15px;
+}
+
+@media screen and (max-width:400px) {
+  .horizontal-grid {flex-direction:column;}
 }

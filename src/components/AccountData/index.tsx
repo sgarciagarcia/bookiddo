@@ -23,7 +23,7 @@ const Account = () => {
         <div className="bg-shape1 wrapper centered h100">
             <h1>{nameOnly} & {kidData.kidName}</h1>
         <div><img src ={avatar} alt="Avatar"/></div>
-        <h2 className="title white">{kidData.kidName}'s favorite things:</h2> 
+        <h2>{kidData.kidName}'s favorite things:</h2> 
         <ul>{kidData.selectedTopics.map ((topic:any, i:any) =>  {return <TopicButton key={i} topic={topic} />})}
         </ul>    
         <button className="secondary-button">Edit profile</button>

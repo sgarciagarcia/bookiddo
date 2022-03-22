@@ -31,7 +31,7 @@ const Menu = () => {
 
 
     return (
-        <div className="h100 wrapper centered">
+        <div className="h100 bg-login wrapper centered">
             <picture><img src={logo} alt="Bookiddo logo"/></picture>
             <h1 className="txt-white">bookiddo</h1>
             <h2 className="cursive txt-white">Read to grow up!</h2>
@@ -39,8 +39,8 @@ const Menu = () => {
             <button className="centered-button third-button" onClick={handleLogin}> Sign in with Google </button> 
            
             </div>
-            {supportsPWA && ( <div className="banner sticky"><span>Have you heard? You can now download our app!</span>
-            <button className="secondary-button" onClick={handleInstall}> Install app</button></div>)}     
+            <div className="banner sticky"><span>Have you heard? You can now download our app!</span>
+            <button className="secondary-button" onClick={handleInstall}> Install app</button></div>   
         </div>
         
 )
