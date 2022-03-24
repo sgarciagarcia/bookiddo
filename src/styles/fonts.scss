@@ -97,4 +97,6 @@ a {
   top: 80px;
   left: 90%;
 }
-
+@media screen and (max-width:450px) {
+  .floating-info{left:0px};
+}
