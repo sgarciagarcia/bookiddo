@@ -17,7 +17,8 @@ Bookiddo is created with:
 
 ## Preview
 
-![Login Screen](src/images/preview/preview1.jpg?raw=true)
+![App preview](src/images/preview/preview1.jpg?raw=true)
+![Desktop preview](src/images/preview/preview2.jpg?raw=true)
 ## Contact
 
 You can find me at:
