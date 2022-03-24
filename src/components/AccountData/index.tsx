@@ -23,7 +23,7 @@ const Account = () => {
   );
   const nameOnly = kidData.name.substring(0, kidData.name.indexOf(" "));
   return (
-    <div className="bg-shape1 wrapper centered h100">
+    <div className="bg-shape1 wrapper centered h100 top-padding">
       <h1>
         {nameOnly} & {kidData.kidName}
       </h1>
