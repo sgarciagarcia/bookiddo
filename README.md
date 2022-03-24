@@ -8,8 +8,7 @@ This app recommends books to children based on their preferences. Created with [
 * [Let's talk](#contact)
 
 ## Description
-You want your child to read. It's that simple. But you do not find books that catch his/her attention.
-...Or maybe, your child is a bookworm, and you love it! So you want to help him/her find new adventures and discover books specifically chosen based on what he/she likes the most.
+You want your child to read. It's that simple. But you do not find books that catch his/her attention...or maybe, your child is a bookworm, and you love it! So you want to help him/her find new adventures and discover books specifically chosen based on what he/she likes the most.
 Bookiddo can help you with that!
 	
 ## Technologies
